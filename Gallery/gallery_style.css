@@ -1,0 +1,286 @@
+:root {
+    --primary-color: #4a6fa5;
+    --secondary-color: #ff9a3c;
+    --text-color: #333;
+    --bg-color: #f8f9fa;
+    --border-color: #ddd;
+    --hover-color: #ff6b6b;
+    --animation-duration: 0.3s;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Comic Neue', sans-serif;
+}
+
+header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 1rem;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.logo-container {
+    display: flex;
+    align-items: left;
+    justify-content: left;
+    gap: 15px;
+}
+
+.logo {
+    width: 50px;
+    height: 50px;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    font-family: 'Baloo 2', sans-serif;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+main {
+    flex: 1;
+    padding: 2rem;
+}
+
+.gallery-intro {
+    text-align: center;
+    margin-bottom: 2rem;
+    min-height: 60px;
+}
+
+#typing-text {
+    font-size: 1.3rem;
+    color: var(--primary-color);
+    font-weight: bold;
+    border-right: 3px solid var(--secondary-color);
+    padding-right: 5px;
+    display: inline-block;
+    height: 1.5em;
+    overflow: hidden;
+}
+
+.gallery-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 15px;
+}
+
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    aspect-ratio: 1/1;
+    transition: all var(--animation-duration) cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--animation-duration) ease;
+}
+
+.gallery-item::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+    opacity: 0;
+    transition: opacity var(--animation-duration) ease;
+}
+
+/* Popup hover effects */
+.gallery-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    z-index: 10;
+}
+
+.gallery-item:hover::after {
+    opacity: 1;
+    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+}
+
+.gallery-item .img-number {
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    color: white;
+    font-weight: bold;
+    font-size: 1.2rem;
+    z-index: 2;
+    opacity: 0;
+    transition: all var(--animation-duration) ease;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+}
+
+.gallery-item .img-caption {
+    position: absolute;
+    bottom: -50px;
+    left: 0;
+    width: 100%;
+    padding: 10px;
+    background-color: rgba(0,0,0,0.7);
+    color: white;
+    font-size: 0.9rem;
+    opacity: 0;
+    transition: all var(--animation-duration) ease;
+}
+
+.gallery-item:hover .img-number,
+.gallery-item:hover .img-caption {
+    opacity: 1;
+}
+
+.gallery-item:hover .img-caption {
+    bottom: 0;
+}
+
+footer {
+    background-color: var(--primary-color);
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    margin-top: auto;
+}
+
+/* Typing animation */
+@keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+}
+
+@keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: var(--secondary-color) }
+}
+
+/* Responsive styles */
+@media (max-width: 1024px) {
+    .gallery-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .gallery-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    header h1 {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .gallery-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .logo-container {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .logo {
+        width: 40px;
+        height: 40px;
+    }
+    
+    header h1 {
+        font-size: 1.8rem;
+    }
+    
+    #typing-text {
+        font-size: 1.1rem;
+    }
+}
+
+
+
+
+
+
+
+
+/*Header style - for all device compatible responsive system*/
+@media (max-width: 992px) {   
+    header h1 {
+        font-size: 2.2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 1.8rem;
+    }
+    
+    .logo-container {
+        margin-left: 15px;
+        gap: 12px;
+    }
+    
+    .logo {
+        width: 45px;
+        height: 45px;
+    }
+
+@media (max-width: 576px) {
+    header h1 {
+        font-size: 1.6rem;
+    }
+    
+    .logo-container {
+        margin-left: 10px;
+        gap: 10px;
+    }
+    
+    .logo {
+        width: 40px;
+        height: 40px;
+    }
+    
+
+@media (max-width: 400px) {
+    header h1 {
+        font-size: 1.4rem;
+    }
+    
+    .logo-container {
+        gap: 8px;
+    }
+    
+    .logo {
+        width: 35px;
+        height: 35px;
+    }
+}
+
+/* Extra small devices (phones in portrait) */
+@media (max-width: 320px) {
+    
+    header h1 {
+        font-size: 1.2rem;
+    }
+    
+    .logo {
+        width: 30px;
+        height: 30px;
+    }
+}

@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en">  <!-- Changed lang to Oromo -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+  <title>Qabeenya Gedeo · Suuraa</title>  <!-- Gedeo Heritage · Gallery -->
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../../../fontawesome/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700&family=Comic+Neue&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../Next2/Nav1/style-nav.css">
+  <link rel="icon" href="../../../Ged/Home/img/logo.png">
+  <link rel="stylesheet" href="../Next2/Down_icon/styles22.css">
+  <style>
+    /* ----- RESET & BRAND COLORS (unchanged) ----- */
+    :root {
+      --primary6: #4a6fa5;
+      --primary-dark: #10418A;
+      --secondary6: #ff9a3c;
+      --text-dark: #1e2b37;
+      --bg-light: #f8f9fa;
+      --card-bg: #ffffff;
+      --border-light: #e0e7ef;
+      --shadow-sm: 0 8px 20px rgba(16,65,138,0.08);
+      --shadow-hover: 0 20px 30px -8px rgba(16,65,138,0.25);
+      --transition: 0.25s cubic-bezier(0.2, 0.9, 0.3, 1);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: var(--bg-light);
+      font-family: 'Comic Neue', 'Segoe UI', sans-serif;
+      color: var(--text-dark);
+      display: flex; flex-direction: column; min-height: 100vh;
+      line-height: 1.5; -webkit-font-smoothing: antialiased;
+    }
+    /* ----- HEADER (original) ----- */
+    header {
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary6));
+      color: white; padding: 0.9rem 2rem; display: flex; align-items: center;
+      box-shadow: 0 8px 20px rgba(16,65,138,0.3);
+      border-bottom: 4px solid #6E99D8;
+    }
+    .logo-container { display: flex; align-items: center; gap: 18px; }
+    .logo { width: 54px; height: 54px; border-radius: 50%; border: 3px solid white; object-fit: cover; }
+    header h1 {
+      font-size: 2.4rem; font-family: 'Baloo 2', sans-serif;
+      background: linear-gradient(135deg, #fff, #f0f3ff);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      text-shadow: 3px 3px 6px rgba(0,0,0,0.15);
+    }
+    /* ----- TYPING INTRO ----- */
+    .gallery-intro { text-align: center; margin: 2rem 0 1.2rem; padding: 0 10px; }
+    #typing-text {
+      font-size: 1rem; font-weight: 500; color: var(--primary-dark);
+      border-right: 2px solid var(--secondary6); padding-right: 8px;
+      display: inline-block; min-height: 1rem; overflow: hidden;
+      white-space: nowrap; max-width: 100%;
+    }
+    /* ----- FILTER BAR (preserved) ----- */
+    .filter-container {
+      display: flex; justify-content: center; flex-wrap: wrap;
+      gap: 12px; margin: 25px 12px 20px;
+    }
+    .filter-btn {
+      padding: 10px 22px; background: white; border: 2px solid var(--primary6);
+      border-radius: 40px; font-weight: 700; font-size: 1rem;
+      color: var(--primary-dark); cursor: pointer; transition: var(--transition);
+      box-shadow: var(--shadow-sm); display: inline-flex; align-items: center; gap: 6px;
+    }
+    .filter-btn i { font-size: 1rem; }
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--primary6); color: white; border-color: var(--primary-dark);
+      transform: translateY(-3px); box-shadow: 0 12px 18px -8px #10418A80;
+    }
+    /* ----- SEARCH BAR (new) below filter ----- */
+    .search-wrapper {
+      display: flex; justify-content: center; margin: 10px 15px 30px;
+    }
+    .search-bar {
+      background: white; border-radius: 60px; padding: 8px 20px;
+      box-shadow: var(--shadow-sm); border: 2px solid var(--primary6);
+      display: inline-flex; align-items: center; width: min(500px, 100%);
+    }
+    .search-bar i {
+      color: var(--primary-dark); font-size: 1rem; margin-right: 12px;
+    }
+    .search-bar input {
+      border: none; outline: none; font-size: 1rem; width: 100%;
+      font-family: 'Comic Neue', sans-serif; background: transparent;
+    }
+    .search-bar input::placeholder { color: #a0b8cf; font-style: italic; }
+    /* ----- MAIN GALLERY GRID ----- */
+    .gallery-grid {
+      display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px;
+      margin: 0 15px 30px 15px;
+    }
+    @media (max-width: 1200px) { .gallery-grid { grid-template-columns: repeat(5, 1fr); } }
+    @media (max-width: 900px) { .gallery-grid { grid-template-columns: repeat(4, 1fr); } }
+    @media (max-width: 600px) { .gallery-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 420px) { .gallery-grid { grid-template-columns: repeat(2, 1fr); } }
+
+    .gallery-item {
+      position: relative; border-radius: 20px; overflow: hidden;
+      aspect-ratio: 1/1; box-shadow: var(--shadow-sm); transition: var(--transition);
+      cursor: pointer; background: #eee;
+    }
+    .gallery-item img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      transition: transform 0.4s ease; 
+    }
+    .gallery-item:hover { transform: scale(1.02); box-shadow: var(--shadow-hover); z-index: 12; }
+    .gallery-item:hover img { transform: scale(1.08); }
+
+    .item-overlay {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      background: linear-gradient(0deg, rgba(0,0,0,0.7) 0%, transparent 60%);
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 16px; opacity: 0; transition: opacity 0.25s ease; color: white;
+      pointer-events: none;
+    }
+    .gallery-item:hover .item-overlay { opacity: 1; }
+    .item-number { font-weight: 800; font-size: 1rem; text-shadow: 2px 2px 5px black; }
+    .item-cat {
+      background: var(--secondary6); align-self: flex-start; padding: 5px 14px;
+      border-radius: 30px; font-size: 0.55rem; font-weight: bold; color: #1e2b37;
+      margin-top: 8px; box-shadow: 0 4px 8px #00000040;
+    }
+    .info-btn {
+      position: absolute; bottom: 18px; right: 18px;
+      background: white; border: none; width: 44px; height: 44px;
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      color: var(--primary-dark); font-size: 1rem; cursor: pointer;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.3); opacity: 0; transform: scale(0.8);
+      transition: 0.2s ease; z-index: 15; pointer-events: auto;
+    }
+    .gallery-item:hover .info-btn { opacity: 1; transform: scale(1); }
+    .info-btn:hover { background: var(--secondary6); color: white; }
+
+    /* ----- LIGHTBOX (FIXED info btn) ----- */
+    .lightbox {
+      display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95);
+      z-index: 1000; justify-content: center; align-items: center;
+      flex-direction: column;
+    }
+    .lightbox-content {
+      position: relative; display: flex; flex-direction: column;
+      align-items: center; max-width: 95vw; max-height: 95vh;
+    }
+    .lightbox-img {
+      max-width: 95vw; max-height: 80vh; border-radius: 20px;
+      box-shadow: 0 0 30px rgba(0,0,0,0.7);
+      object-fit: contain;
+      background: #1a1a1a; display: block;
+    }
+    .lightbox-title {
+      color: white; font-size: 1rem; margin-top: 15px;
+      font-family: 'Baloo 2', sans-serif; text-shadow: 2px 2px 5px black;
+      background: rgba(0,0,0,0.5); padding: 8px 25px; border-radius: 50px;
+      backdrop-filter: blur(5px); border: 2px solid var(--secondary6);
+    }
+    .lightbox-info-btn {
+      position: absolute; bottom: 100px; right: 10px;
+      background: var(--secondary6); border: 3px solid white;
+      width: 65px; height: 65px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--primary-dark); font-size: 1rem; cursor: pointer;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.7); z-index: 1010;
+      transition: 0.2s ease;
+    }
+    .lightbox-info-btn:hover {
+      transform: scale(1.1); background: white; color: var(--secondary6);
+    }
+    .lightbox-close {
+      position: absolute; top: 20px; right: 30px; font-size: 2rem;
+      color: white; cursor: pointer; background: none; border: none;
+      z-index: 1020; text-shadow: 0 0 15px black;
+    }
+
+    /* ----- HORIZONTAL SCROLL SECTIONS (FULL WIDTH, NO RADIUS) ----- */
+    .scroll-section {
+      margin: 40px 0 50px 0;           /* removed left/right margin */
+      background: #f0f5fd;             /* same light background */
+      padding: 25px 15px;              /* horizontal padding inside, but background is full width */
+      width: 100%;                      /* ensures full viewport width */
+      box-shadow: inset 0 1px 8px #c0d0e8;
+      border-radius: 0;                 /* explicitly zero */
+    }
+    /* inner content still respects alignment */
+    .scroll-header {
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; padding: 0 10px 15px; gap: 10px;
+      max-width: 1400px; margin: 0 auto;  /* optional centering for header */
+    }
+    .scroll-header h2 {
+      font-family: 'Baloo 2', sans-serif; font-size: 1rem; color: var(--primary-dark);
+      display: flex; align-items: center; gap: 10px;
+    }
+    .scroll-header h2 i { color: var(--secondary6); font-size: 1rem; }
+    .scroll-desc { color: #2c3e4f; font-size: 1rem; font-weight: 500; }
+    .see-more-btn {
+      background: transparent; border: 2px solid var(--primary6);
+      color: var(--primary-dark); padding: 8px 24px; border-radius: 40px;
+      font-weight: bold; cursor: pointer; transition: 0.2s;
+    }
+    .see-more-btn:hover { background: var(--primary6); color: white; }
+
+    .scroll-wrapper {
+      position: relative; display: flex; align-items: center;
+      max-width: 1400px; margin: 0 auto; /* centers the scroll area with background full */
+    }
+    .scroll-area {
+      overflow-x: auto; scroll-behavior: smooth; scrollbar-width: thin;
+      padding: 10px 5px; width: 100%; -webkit-overflow-scrolling: touch;
+    }
+    .scroll-area::-webkit-scrollbar { height: 8px; }
+    .scroll-area::-webkit-scrollbar-thumb { background: var(--primary6); border-radius: 20px; }
+    .scroll-track { display: flex; gap: 20px; width: max-content; }
+    .scroll-card {
+      width: 180px; flex-shrink: 0; border-radius: 28px; overflow: hidden;
+      background: white; box-shadow: 0 10px 18px rgba(74,111,165,0.25);
+      transition: 0.2s; cursor: pointer;
+    }
+    .scroll-card:hover { transform: translateY(-6px); }
+    .scroll-card img { width: 100%; height: 150px; object-fit: cover; }
+    .card-footer {
+      padding: 10px; font-weight: bold; text-align: center; background: white;
+      color: var(--primary-dark); border-top: 3px solid var(--secondary);
+    }
+    .scroll-arrow {
+      background: var(--primary6); color: white; width: 44px; height: 44px;
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; position: absolute; z-index: 10; cursor: pointer;
+      box-shadow: 0 8px 14px #10418A60; transition: 0.2s; opacity: 0.9;
+      border: 2px solid white;
+    }
+    .scroll-arrow.left { left: -15px; }
+    .scroll-arrow.right { right: -15px; }
+    .scroll-arrow:hover { background: var(--secondary); transform: scale(1.08); }
+    @media (max-width:700px){ .scroll-arrow{ display:none; } }
+
+    /* ----- DESCRIPTION POPUP (with higher z-index than lightbox) ----- */
+    .desc-popup {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.75); backdrop-filter: blur(6px);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 2000; /* Increased from 999 to be above lightbox (1000) */
+      opacity: 0; pointer-events: none; transition: 0.3s ease;
+    }
+    .desc-popup.active { opacity: 1; pointer-events: auto; }
+    .popup-card {
+      background: white; max-width: 450px; width: 90%; border-radius: 48px 48px 32px 32px;
+      padding: 30px 25px; position: relative; box-shadow: 0 40px 50px #00000050;
+      transform: scale(0.95); transition: 0.3s;
+    }
+    .active .popup-card { transform: scale(1); }
+    .popup-card h3 {
+      font-size: 1rem; color: var(--primary-dark); font-family: 'Baloo 2', sans-serif;
+      margin-bottom: 10px; border-bottom: 4px solid var(--secondary6); display: inline-block;
+    }
+    .popup-category {
+      background: #e9eff9; padding: 6px 16px; border-radius: 40px;
+      font-weight: bold; color: var(--primary-dark); display: inline-block; margin: 10px 0 15px;
+    }
+    .popup-description {
+      font-size: 1rem; color: #1e2b2f; max-height: 300px; overflow-y: auto;
+      margin: 20px 0; line-height: 1.6; background: #fcf9f2; padding: 18px; border-radius: 28px;
+    }
+    .popup-close {
+      position: absolute; top: 20px; right: 25px; font-size: 1rem;
+      cursor: pointer; color: var(--primary-dark); background: none; border: none;
+    }
+    .popup-close:hover { color: var(--secondary6); }
+
+    .no-items-message {
+      text-align: center; font-size: 1rem; padding: 50px; color: #aaa; display: none;
+    }
+    footer {
+      background: linear-gradient(135deg, #10418A, #4a6fa5); color: white;
+      text-align: center; padding: 1rem; margin-top: 30px; border-top: 4px solid #6E99D8;
+    }
+    .bottom-nav, .up-arrow-btn, .down-arrow-btn { display: none; }
+    
+    
+
+
+
+
+
+
+
+/*Header style - for all device compatible responsive system*/
+@media (max-width: 992px) {   
+    header h1 {
+        font-size: 2.2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 1.8rem;
+    }
+    
+    .logo-container {
+        margin-left: 15px;
+        gap: 12px;
+    }
+    
+    .logo {
+        width: 45px;
+        height: 45px;
+    }
+
+@media (max-width: 576px) {
+    header h1 {
+        font-size: 1.6rem;
+    }
+    
+    .logo-container {
+        margin-left: 10px;
+        gap: 10px;
+    }
+    
+    .logo {
+        width: 40px;
+        height: 40px;
+    }
+    
+
+@media (max-width: 400px) {
+    header h1 {
+        font-size: 1.4rem;
+    }
+    
+    .logo-container {
+        gap: 8px;
+    }
+    
+    .logo {
+        width: 35px;
+        height: 35px;
+    }
+}
+
+/* Extra small devices (phones in portrait) */
+@media (max-width: 320px) {
+    
+    header h1 {
+        font-size: 1.2rem;
+    }
+    
+    .logo {
+        width: 30px;
+        height: 30px;
+    }
+}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo-container">
+      <img src="../../../Ged/Home/img/logo.png" alt="Gedeo Kids" class="logo" onerror="this.src='https://via.placeholder.com/150?text=Gedeo+Logo'">
+      <h1>Footo Qoola</h1>  <!-- Changed from "Footo Qoola" to "Suuraa Qoola" (Cool Pictures) -->
+    </div>
+  </header>
+
+  <main>
+    <div class="gallery-intro">
+      <p id="typing-text"></p>
+    </div>
+
+    <div class="filter-container">
+      <button class="filter-btn active" data-filter="all"><i class="fas fa-layer-group"></i> Duuchcha</button>  <!-- All -->
+      <button class="filter-btn" data-filter="Gedeo-People"><i class="fas fa-users"></i> Arda</button>  <!-- Gedeo People -->
+      <button class="filter-btn" data-filter="Darraro"><i class="fas fa-mountain"></i> Darraro</button>  <!-- Darraro (same) -->
+      <button class="filter-btn" data-filter="Gada-System"><i class="fas fa-gavel"></i> Gadaa Siira</button>  <!-- Gadaa System -->
+      <button class="filter-btn" data-filter="Gedeo-Clothes"><i class="fas fa-tshirt"></i> Seemma</button>  <!-- Clothes -->
+    </div>
+
+    <!-- 2️⃣ NEW SEARCH BAR (with Darraro & keywords) -->
+    <div class="search-wrapper">
+      <div class="search-bar">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" id="searchInput" placeholder="barbaadi... (Darraro, gadaa, seema, baalle)">  <!-- search... -->
+      </div>
+    </div>
+
+    <div class="gallery-grid" id="galleryGrid"></div>
+    <div class="no-items-message" id="noItemsMsg">✨ Wantala tokko illee hin argamne</div>  <!-- No items match -->
+
+    <div id="scrollSectionsContainer"></div>
+  </main>
+
+
+  <!-- FAB Bottom Navigation -->
+<nav class="bottom-nav">
+  <a href="../Next2/abc/abc.html" class="nav-link"><i class="fas fa-font"></i><span>Borro</span></a>  <!-- Borro → Arfi (Alphabet) -->
+  <a href="../Next2/History/history.html" class="nav-link"><i class="fas fa-history"></i><span>Raaga</span></a>  <!-- Raaga → Seenaa (History) -->
+
+  <div class="fab-container">
+    <button class="add-button" id="homeBtn"><i class="fas fa-home"></i></button>
+    <div class="fab-menu" id="fabMenu">
+      <a href="gallery.html" class="fab-item" title="Gallery"><i class="fas fa-images"></i></a>
+      <a href="../Video/video.htm" class="fab-item" title="Video"><i class="fas fa-video"></i></a>
+      <a href="../../../En/Home/Next2/Games/games-zone.html" class="fab-item" title="Games"><i class="fa-solid fa-gamepad"></i></a>
+    </div>
+  </div>
+
+  <a href="../Next2/Calendar/calendar.html" class="nav-link"><i class="fas fa-calendar"></i><span>Barra</span></a>  <!-- Barra → Kalendarii (Calendar) -->
+  <a href="../Next2/Colors/colors.html" class="nav-link"><i class="fas fa-palette"></i><span>Hallo</span></a>  <!-- Hallo → Halluu (Colors) -->
+</nav>
+
+<!-- Loading & Offline Overlays -->
+<div class="loading-overlay"><div class="loading-spinner"></div></div>
+
+<div class="offline-overlay" id="offlineOverlay">
+  <div class="offline-message">
+    <button class="close-offline" id="closeOffline">&times;</button>
+    <i class="fas fa-wifi-slash offline-icon"></i>
+    <h2>NO Internet!</h2>
+    <p>Please check your WiFi or mobile data connection</p>
+    <button class="retry-button">Retry</button>
+  </div>
+</div>
+
+<!-- Online Toast -->
+<div class="online-toast" id="onlineToast">
+  <i class="fas fa-wifi"></i> Back Online
+</div>
+
+<!-- Sounds -->
+<audio id="soundOnline" preload="auto">
+  <source src="data:audio/wav;base64,UklGRlIAAABXQVZFZm10IBAAAAABAAEA..." type="audio/wav">
+</audio>
+<audio id="soundOffline" preload="auto">
+  <source src="data:audio/wav;base64,UklGRlIAAABXQVZFZm10IBAAAAABAAEA..." type="audio/wav">
+</audio>
+
+<!-- Up and Down arrow -->
+<button id="downArrowBtn" class="down-arrow-btn" aria-label="Gara jalaatti">  <!-- Scroll to bottom -->
+    <i class="fas fa-chevron-down"></i>
+  </button>
+
+  <button id="upArrowBtn" class="up-arrow-btn" aria-label="Gara olitti">  <!-- Scroll to top -->
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <!-- END of FAB Bottom Navigation -->
+
+  <footer>© 2018 G.W | Footo Qoola<br>GedeoKids</footer>  <!-- Gallery Page → Fuula Suuraa, GedeoKids → GedeoDaawwitii (Gedeo Kids) -->
+
+  <!-- Description Popup -->
+  <div class="desc-popup" id="descPopup">
+    <div class="popup-card">
+      <button class="popup-close" id="closePopup">&times;</button>
+      <h3 id="popupTitle">Mataduree suuraa</h3>  <!-- Image title -->
+      <div class="popup-category" id="popupCategory">Gedeo</div>
+      <div class="popup-description" id="popupDesc">Hiikkaa aadaa gad fageenya...</div>  <!-- Detailed cultural meaning... -->
+    </div>
+  </div>
+
+  <!-- Lightbox with INFO BUTTON (FIXED: now opens description popup without closing lightbox) -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="lightboxClose">&times;</button>
+    <div class="lightbox-content">
+      <img class="lightbox-img" id="lightboxImg" src="" alt="Suuraa aadaa Gedeo">  <!-- Gedeo cultural image -->
+      <div class="lightbox-title" id="lightboxTitle">Mataduree Suuraa</div>  <!-- Image Title -->
+      <button class="lightbox-info-btn" id="lightboxInfoBtn" title="Ibsa aadaa agarsiisi">  <!-- Show cultural description -->
+        <i class="fa-solid fa-message"></i>
+      </button>
+    </div>
+  </div>
+
+
+  
+
+  <script src="../Next2/Down_icon/script22.js"></script>
+  <script src="script-nav.js"></script>
+
+  <script>
+    (function() {
+      // ---------- CULTURAL DATASET (unchanged, 40 items) ----------
+      const totalImages = 40;
+      const categories = [
+        "Gedeo-People", "Darraro", "Gedeo-Clothes", "Gada-System", "Darraro",
+        "Gada-System", "Gedeo-People", "Darraro", "Gedeo-People", "Gada-System",
+        "Gedeo-Clothes", "Gedeo-People", "Darraro", "Gada-System", "Darraro",
+        "Darraro", "Gedeo-People", "Gedeo-Clothes", "Gada-System", "Gedeo-Clothes",
+        "Gedeo-People", "Gada-System", "Darraro", "Gedeo-Clothes", "Gada-System",
+        "Gedeo-People", "Darraro", "Gedeo-Clothes", "Gada-System", "Gedeo-People",
+        "Darraro", "Gedeo-Clothes", "Gada-System", "Darraro", "Gedeo-People",
+        "Gedeo-Clothes", "Gada-System", "Darraro", "Gedeo-People", "Gada-System"
+      ];
+      
+      // Cultural descriptions in Afaan Oromo
+      const culturalDesc = [
+        "Jaarsi aadaa oduu durii muka Odaa jala barsiisa.",  /* Elder teaching oral history under the sacred Odaa tree. */
+        "Tulluu Darraro – bakka walga'ii fi bokkaa godhanii durii.",  /* Darraro hills – ancient site for seasonal assemblies and rainmaking. */
+        "Uffata jabduu quncee tumame, halluu diimaa fi cuquliisa qabu, Baalle keessa uffatama.",  /* Handwoven cotton cloth with indigo patterns, worn during Baalle. */
+        "Gamoonni Gadaa aangoo darbiisa sadarkaa itti aanutti.",  /* Gadaa council transferring power to the next grade (Luba). */
+        "Galata oomishaatiin Darraro keessa muuziiqaa aadaa wajjin.",  /* Harvest thanksgiving in Darraro with traditional music. */
+        "Lubaaleen manguddoo aarsaa bosona eebbifamu eegsisuuf godhan.",  /* Luba elders performing a ritual to protect sacred groves. */
+        "Ijoolleen mammaaksa fi hiikkoo Gedeo akkamii warra isaaniyaa irraa baratu.",  /* Children learning Gedeo proverbs and riddles from grandparents. */
+        "Bosona qonnaa – Gedeo bosona eegsisuuf qonnaa enset.",  /* Agroforestry – Gedeo conservation of forests and enset farms. */
+        "Sirba aadaa 'Gogorma' Irreecha keessa.",  /* Traditional dance 'Gogorma' during Irreecha celebration. */
+        "Hoogganaa Gadaa eebbifama fudhata murtii dursee.",  /* Gadaa leader receiving blessings before judgement. */
+        "Dubartoonni buna aadaa (buna qalaa) eessan.",  /* Women roasting coffee in a cultural ceremony (buna qalaa). */
+        "Oduu halkanii – seena gootummaa dargaggootaaf dabarsa.",  /* Night storytelling – passing heroic tales to youth. */
+        "Jaarsoli murtii muka Baalle Darraro jala raawwatu.",  /* Elders mediating a dispute under the Darraro baalle tree. */
+        "Muka biyyaaleessa lafa abbummaa eeguuf dhaabu.",  /* Planting native trees to preserve ancestral land. */
+        "Mallattoo Gadaa barcuma mukaa (barumsa) irratti bocame.",  /* Gadaa symbol carved into a wooden stool (barumsa). */
+        "Dibbe fi farra koluu sirna bokkaa keessa.",  /* Drums and bamboo flutes for rain ceremony. */
+        "Dubartoonni xixiqqoon sirba sirna Baalle barattu.",  /* Young girls learning songs of the Baalle system. */
+        "Uffata bocalee ji'oomitrii fiizikaa Gedeo agarsiisu.",  /* Clothes with geometric patterns representing Gedeo cosmology. */
+        "Walga'iin Gadaa muka Odaa jala uffata guutuun.",  /* Gadaa assembly at the odaa tree in full regalia. */
+        "Uffata cidhaa jalqaba jaarraa 20ffaa.",  /* Traditional wedding dress from the early 20th century. */
+        "Jaarsi seenaa godaansa ummata Gedeo odeessa.",  /* Elder narrating the migration story of Gedeo people. */
+        "Uffata Luba: gogaa qeeransaati fi gaanfaa aadaa.",  /* Luba regalia: leopard skin and ceremonial horn. */
+        "Tuulluun Darraro daangaa seenaa agarsiisu.",  /* Darraro stone cairns marking historical borders. */
+        "Ijoolleen uffata xixinnoo aadaa uffatan.",  /* Children dressed in miniature cultural outfits. */
+        "Meeshaa leemoo 'baaqqee' ayyaana keessa taphate.",  /* Bamboo instrument 'baaqqee' played during festivals. */
+        "Hurrii tulluu Darraro irra – lafa eebbifamaa.",  /* Mist over Darraro mountains – sacred landscape. */
+        "Horsiisee damma aadaa quncisaa qaaccee fayyadamuun.",  /* Traditional beekeeping using bark hives. */
+        "Dubartiin Gedeo jabduu fiixeen marachitsu.",  /* Gedeo woman spinning cotton on a drop spindle. */
+        "Jaarsi buna dhugaa marii Gadaa dura.",  /* Elder sipping coffee before Gadaa deliberation. */
+        "Ayyaana Baalle – aangoo dabarsuu siyaasaa.",  /* Baalle ceremony – handover of political authority. */
+        "Dhiironni 'qabbo' uffatanii marii hawaasa dubbatu.",  /* Men wrapped in 'qabbo' blanket discussing community affairs. */
+        "Fakkii fi qaama magarasuuf aadaa fi astee.",  /* Facial and body tattoo traditions and symbolism. */
+        "Re'ee qaluun aarsaa fokkeeyyiif.",  /* Ritual slaughter of a goat for ancestor spirits. */
+        "Finjaala Darraro – kennaa fi kadhanna.",  /* Darraro waterfall – offerings and prayers. */
+        "Gurbaan darbuu ulee loon tiksaa barsiisu.",  /* Boys learning stick throwing for cattle herding. */
+        "Sirba daa'imummaa aadaa Gedeo jaartiin sirbu.",  /* Lullaby with Gedeo cultural motifs sung by elder. */
+        "Lafa ol ka'aa qotuun lafa kufuu dhorkuuf.",  /* Terracing the highlands to prevent erosion. */
+        "Farra leemoo sirna nagaa keessa taphachitsu.",  /* Bamboo flute performance during peace ceremonies. */
+        "Quruxxaa fi buna eebbifamaaf qopheessu.",  /* Preparing incense coffee for blessing. */
+        "Alabni Gadaa jalqaba barnoota haaraa ol fudhatame."  /* Gadaa flag raised at the start of new term. */
+      ];
+
+      let galleryItems = [];
+      for (let i = 1; i <= totalImages; i++) {
+        const category = categories[i-1] || "Gedeo-People";
+        let imageTopic = "";
+        if (category === "Gedeo-People") imageTopic = "ethiopian+people+portrait";
+        else if (category === "Darraro") imageTopic = "ethiopian+mountain+landscape";
+        else if (category === "Gada-System") imageTopic = "african+tribe+ceremony";
+        else if (category === "Gedeo-Clothes") imageTopic = "ethiopian+traditional+clothing";
+        else imageTopic = "ethiopian+culture";
+        
+        galleryItems.push({
+          id: i,
+          cat: category,
+          caption: culturalDesc[i-1] || `Gedeo heritage #${i}`,
+          img: `../../../Ged/Home/Gallery/img/st${i}.jpg`,
+          fallbackImg: `https://picsum.photos/500/500?random=${i}&grayscale&seed=${category}`,
+          index: i-1
+        });
+      }
+
+      // ----- DOM elements
+      const grid = document.getElementById('galleryGrid');
+      const noMsg = document.getElementById('noItemsMsg');
+      let currentFilter = 'all';
+      let currentLightboxIndex = 0;
+
+      // Image error fallback
+      function handleImageError(img, item) {
+        if (!img.src.includes('picsum')) {
+          img.src = item.fallbackImg;
+        }
+      }
+
+      // ----- RENDER with filter & search (case‑insensitive keyword)
+      function renderGrid(filter, searchTerm = '') {
+        grid.innerHTML = '';
+        let visibleCount = 0;
+        galleryItems.forEach((item, idx) => {
+          const matchesFilter = (filter === 'all' || item.cat === filter);
+          const searchLower = searchTerm.toLowerCase();
+          const matchesSearch = searchTerm === '' || 
+            item.caption.toLowerCase().includes(searchLower) || 
+            item.cat.toLowerCase().includes(searchLower) ||
+            item.id.toString().includes(searchLower);   // also search by id
+          if (matchesFilter && matchesSearch) {
+            visibleCount++;
+            const col = document.createElement('div');
+            col.className = 'gallery-item';
+            col.dataset.index = idx;
+            col.dataset.category = item.cat;
+            
+            const img = document.createElement('img');
+            img.src = item.img;
+            img.alt = `Gedeo ${item.cat}`;
+            img.onerror = function() { 
+              this.src = item.fallbackImg;
+              this.onerror = null;
+            };
+            img.loading = 'lazy';
+            
+            const overlay = document.createElement('div');
+            overlay.className = 'item-overlay';
+            overlay.innerHTML = `<div class="item-number">#${item.id}</div><div class="item-cat">${item.cat.replace('-',' ')}</div>`;
+            
+            const infoBtn = document.createElement('button');
+            infoBtn.className = 'info-btn';
+            infoBtn.innerHTML = '<i class="fa-solid fa-message"></i>';
+            infoBtn.setAttribute('aria-label', 'details');
+            infoBtn.addEventListener('click', (e) => { 
+              e.stopPropagation(); 
+              showDescription(idx); 
+            });
+            
+            col.addEventListener('click', (e) => { 
+              if (!e.target.closest('.info-btn')) {
+                openLightbox(idx); 
+              }
+            });
+            
+            col.append(img, overlay, infoBtn);
+            grid.appendChild(col);
+          }
+        });
+        noMsg.style.display = visibleCount === 0 ? 'block' : 'none';
+      }
+
+      // description popup (same)
+      const popup = document.getElementById('descPopup');
+      const popupTitle = document.getElementById('popupTitle');
+      const popupCat = document.getElementById('popupCategory');
+      const popupDesc = document.getElementById('popupDesc');
+      const closePopup = document.getElementById('closePopup');
+      
+      function showDescription(idx) {
+        const item = galleryItems[idx];
+        popupTitle.innerText = `#${item.id} · Qabeenya Gedeo`;
+        popupCat.innerText = item.cat.replace('-',' ');
+        popupDesc.innerText = item.caption;
+        popup.classList.add('active');
+      }
+      closePopup.addEventListener('click', () => popup.classList.remove('active'));
+      popup.addEventListener('click', (e) => { if(e.target === popup) popup.classList.remove('active'); });
+
+      // LIGHTBOX (FIX: info button calls showDescription without closing)
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImg = document.getElementById('lightboxImg');
+      const lightboxTitle = document.getElementById('lightboxTitle');
+      const lightboxClose = document.getElementById('lightboxClose');
+      const lightboxInfoBtn = document.getElementById('lightboxInfoBtn');
+      
+      function openLightbox(idx) {
+        currentLightboxIndex = idx;
+        const item = galleryItems[idx];
+        lightboxImg.src = item.img;
+        lightboxImg.onerror = function() {
+          this.src = item.fallbackImg;
+          this.onerror = null;
+        };
+        lightboxTitle.innerText = `#${item.id} · ${item.cat.replace('-',' ')}`;
+        lightbox.style.display = 'flex';
+      }
+      
+      lightboxClose.addEventListener('click', ()=> {
+        lightbox.style.display = 'none';
+        lightboxImg.src = '';
+      });
+      
+      lightbox.addEventListener('click', (e)=> { 
+        if(e.target === lightbox) {
+          lightbox.style.display = 'none';
+          lightboxImg.src = '';
+        }
+      });
+      
+      // 1️⃣ FIX: info button inside lightbox shows description WITHOUT closing lightbox
+      lightboxInfoBtn.addEventListener('click', (e) => {
+        e.stopPropagation();          // avoid closing lightbox
+        showDescription(currentLightboxIndex); // now works independently
+      });
+
+      // filter buttons
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          currentFilter = btn.dataset.filter;
+          const searchTerm = document.getElementById('searchInput').value;
+          renderGrid(currentFilter, searchTerm);
+        });
+      });
+
+      // typing effect (now in Afaan Oromo)
+      const textEl = document.getElementById('typing-text');
+      const gedeoTexts = [
+        "⚖️ Sirna Baalle Gedeo: dimokraasii biyyaaleessaa",  // Gedeo Baalle system: indigenous democracy
+        "🌳 Bosona eebbifamaa fi ogummaa naannoo",  // Sacred forests & environmental wisdom
+        "👘 Uffata aadaa: eenyummaa harkaan dhawame",  // Traditional clothes: identity woven by hand
+        "🏞️ Darraro: tulluu nagaa fi araaraa",  // Darraro: hills of peace and reconciliation
+        "🥁 Muuziiqaa Gadaa fi dibbe aadaa"  // Gadaa music and ritual drums
+      ];
+      let tIdx = 0, ch = 0, del = false;
+      function typeGedeoText() {
+        let cur = gedeoTexts[tIdx];
+        textEl.textContent = del ? cur.substring(0, ch-1) : cur.substring(0, ch+1);
+        ch += del ? -1 : 1;
+        let speed = del ? 40 : 100;
+        if (!del && ch === cur.length) { del = true; speed = 2000; }
+        else if (del && ch === 0) { del = false; tIdx = (tIdx + 1) % gedeoTexts.length; speed = 500; }
+        setTimeout(typeGedeoText, speed);
+      }
+      setTimeout(typeGedeoText, 600);
+
+      // ----- HORIZONTAL SCROLL SECTIONS (full width, border-radius removed)
+      const scrollContainer = document.getElementById('scrollSectionsContainer');
+      const sections = [
+        { title: '🌿 Baalle fi Gadaa', desc: 'Sirna hoogganaa', filter: 'Gada-System' },  // Baalle & Gadaa, Leadership rituals
+        { title: '🧥 Uffata Aadaa', desc: 'Seenaa dhawame', filter: 'Gedeo-Clothes' },  // Traditional Attire, Woven stories
+        { title: '⛰️ Lafti Darraro', desc: 'Iddoo eebbifamaa', filter: 'Darraro' }  // Darraro Landscapes, Sacred sites
+      ];
+
+      function createScrollSection(section, index) {
+        const secDiv = document.createElement('div');
+        secDiv.className = 'scroll-section';
+        secDiv.innerHTML = `
+          <div class="scroll-header">
+            <h2>${section.title} <i class="fas fa-arrow-right"></i></h2>
+            <span class="scroll-desc">${section.desc}</span>
+            <button class="see-more-btn" data-filter="${section.filter}"><i class="fas fa-eye"></i> Ilali</button>  <!-- See more -->
+          </div>
+          <div class="scroll-wrapper">
+            <div class="scroll-arrow left" data-scroll="-200"><i class="fas fa-chevron-left"></i></div>
+            <div class="scroll-area" id="scrollArea${index}">
+              <div class="scroll-track" id="scrollTrack${index}"></div>
+            </div>
+            <div class="scroll-arrow right" data-scroll="200"><i class="fas fa-chevron-right"></i></div>
+          </div>
+        `;
+        return secDiv;
+      }
+
+      sections.forEach((sec, idx) => {
+        const sectionEl = createScrollSection(sec, idx);
+        scrollContainer.appendChild(sectionEl);
+
+        const track = document.getElementById(`scrollTrack${idx}`);
+        let filtered = galleryItems.filter(it => it.cat === sec.filter).slice(0, 8);
+        if (filtered.length < 6) filtered = galleryItems.slice(idx*8, idx*8+8);
+        
+        filtered.forEach(fi => {
+          const card = document.createElement('div');
+          card.className = 'scroll-card';
+          
+          const cardImg = document.createElement('img');
+          cardImg.src = fi.img;
+          cardImg.onerror = function() { this.src = fi.fallbackImg; };
+          cardImg.loading = 'lazy';
+          cardImg.alt = fi.cat;
+          
+          const footer = document.createElement('div');
+          footer.className = 'card-footer';
+          footer.innerText = `#${fi.id} · ${fi.cat.split('-')[0]}`;
+          
+          card.appendChild(cardImg);
+          card.appendChild(footer);
+          card.addEventListener('click', ()=> showDescription(fi.index));
+          track.appendChild(card);
+        });
+
+        const area = document.getElementById(`scrollArea${idx}`);
+        const leftArrow = sectionEl.querySelector('.left');
+        const rightArrow = sectionEl.querySelector('.right');
+        leftArrow.addEventListener('click', ()=> area.scrollBy({left: -300, behavior:'smooth'}));
+        rightArrow.addEventListener('click', ()=> area.scrollBy({left: 300, behavior:'smooth'}));
+
+        // add extra images between sections
+        if (idx < sections.length - 1) {
+          const extraDiv = document.createElement('div');
+          extraDiv.className = 'gallery-grid';
+          extraDiv.style.margin = '30px 15px';
+          for (let k = 0; k < 16; k++) {
+            let itemIdx = (idx * 12 + k) % galleryItems.length;
+            let item = galleryItems[itemIdx];
+            
+            const col = document.createElement('div');
+            col.className = 'gallery-item';
+            col.dataset.index = itemIdx;
+            col.dataset.category = item.cat;
+            
+            const img = document.createElement('img');
+            img.src = item.img;
+            img.onerror = function() { this.src = item.fallbackImg; };
+            img.loading = 'lazy';
+            
+            const overlay = document.createElement('div');
+            overlay.className = 'item-overlay';
+            overlay.innerHTML = `<div class="item-number">#${item.id}</div><div class="item-cat">${item.cat.replace('-',' ')}</div>`;
+            
+            const infoBtn = document.createElement('button');
+            infoBtn.className = 'info-btn';
+            infoBtn.innerHTML = '<i class="fa-solid fa-message"></i>';
+            infoBtn.addEventListener('click', (e) => { e.stopPropagation(); showDescription(itemIdx); });
+            
+            col.addEventListener('click', (e) => { if (!e.target.closest('.info-btn')) openLightbox(itemIdx); });
+            col.append(img, overlay, infoBtn);
+            extraDiv.appendChild(col);
+          }
+          scrollContainer.appendChild(extraDiv);
+        }
+      });
+
+      // "See more" buttons
+      document.querySelectorAll('.see-more-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const filter = e.currentTarget.dataset.filter;
+          const targetFilterBtn = Array.from(document.querySelectorAll('.filter-btn')).find(f => f.dataset.filter === filter);
+          if(targetFilterBtn) {
+            targetFilterBtn.click();
+            document.getElementById('galleryGrid').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }
+        });
+      });
+
+      // 3️⃣ search bar integration
+      const searchInput = document.getElementById('searchInput');
+      searchInput.addEventListener('input', function(e) {
+        renderGrid(currentFilter, e.target.value);
+      });
+
+      // initial render
+      renderGrid('all', '');
+    })();
+
+
+    // Debug: Check if navigation elements exist
+  document.addEventListener('DOMContentLoaded', function() {
+    console.log('Bottom nav exists:', !!document.querySelector('.bottom-nav'));
+    console.log('Up arrow exists:', !!document.querySelector('.up-arrow-btn'));
+    console.log('Down arrow exists:', !!document.querySelector('.down-arrow-btn'));
+    
+    // Force show if hidden by CSS
+    const bottomNav = document.querySelector('.bottom-nav');
+    if (bottomNav) {
+      bottomNav.style.display = 'flex';
+      console.log('Forced bottom nav to display');
+    }
+  });
+  </script>
+</body>
+</html>
