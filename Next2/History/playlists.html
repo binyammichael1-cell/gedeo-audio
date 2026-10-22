@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>GK | Gedeo Music Collection</title>
+  
+  <link rel="stylesheet" href="history_style.css">
+  <link rel="stylesheet" href="../../../../fontawesome/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700&family=Comic+Neue&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../Nav1/style-nav.css">
+    <link rel="stylesheet" href="../Down_icon/styles22.css">
+    <link rel="icon" href="../../img/logo.png">
+  <style>
+    :root {
+      --card-bg: #fff; 
+      --card-radius: 14px; 
+      --card-shadow: 0 8px 20px rgba(16,65,138,0.08);
+      --drive-blue: #4285F4;
+      --drive-light: #5a95f5;
+      
+      /* ADD THE MISSING CSS VARIABLES FROM history_style.css */
+      --primary-color: #10418A;
+      --secondary-color: #2D69C4;
+      --accent-color: #6E99D8;
+      --text-color: #333;
+      --bg-color: #F5F5DC;
+      --header-color: #4a6fa5;
+      --timeline-color: #80A0D1;
+      --animation-duration: 0.3s;
+    }
+
+    body {
+      background: linear-gradient(180deg, #f5f5f4, #fafafc);
+      font-family: 'Comic Neue', sans-serif;
+      color: var(--text-color);
+      margin: 0;
+      padding: 0;
+    }
+
+    header.playlists-header {
+      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+      color: #fff;
+      padding: 40px 20px;
+      text-align: center;
+      box-shadow: 0 6px 20px rgba(16,65,138,0.12);
+    }
+    
+    header.playlists-header h1 { 
+      font-family: 'Baloo 2', sans-serif; 
+      font-size: 1.7rem; 
+      margin-bottom: 10px;
+    }
+    
+    header.playlists-header p { 
+      opacity: .95; 
+      font-size: 1rem;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 30px auto;
+      padding: 0 20px 60px;
+    }
+
+    .playlist-card {
+      background: var(--card-bg);
+      border-radius: var(--card-radius);
+      box-shadow: var(--card-shadow);
+      padding: 25px;
+      margin-bottom: 25px;
+      transform: translateY(20px);
+      opacity: 0;
+      transition: all 0.6s ease;
+    }
+
+    .playlist-card.visible {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .playlist-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 2px solid rgba(16,65,138,0.1);
+    }
+
+    .playlist-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--primary-color);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .playlist-icon {
+      font-size: 1.6rem;
+      color: var(--secondary-color);
+    }
+
+    .playlist-desc {
+      color: #666;
+      margin-bottom: 15px;
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+
+    .tracks {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .track {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding: 15px;
+      background: linear-gradient(135deg, #f8f9fa, #ffffff);
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      transition: all 0.3s ease;
+    }
+
+    .track:hover {
+      transform: translateX(5px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    /* Responsive cover images */
+    .track-cover {
+      width: 60px;
+      height: 60px;
+      border-radius: 8px;
+      object-fit: cover;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      flex-shrink: 0;
+    }
+
+    .track-info {
+      flex: 1;
+    }
+
+    .track-name {
+      font-weight: 700;
+      color: var(--primary-color);
+      font-size: 1.1rem;
+      margin-bottom: 5px;
+    }
+
+    .track-artist {
+      font-size: 0.95rem;
+      color: #666;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .track-duration {
+      background: rgba(66,133,244,0.1);
+      color: var(--drive-blue);
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .link-btn {
+      border: none;
+      padding: 10px 15px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+
+    .drive-btn {
+      background: linear-gradient(135deg, var(--drive-blue), var(--drive-light));
+      color: white;
+      box-shadow: 0 4px 12px rgba(66,133,244,0.3);
+    }
+
+    .drive-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(66,133,244,0.4);
+    }
+
+    .link-btn:not(.drive-btn) {
+      background: rgba(16,65,138,0.08);
+      color: var(--primary-color);
+    }
+
+    .link-btn:not(.drive-btn):hover {
+      background: rgba(16,65,138,0.15);
+    }
+
+    .audio-player-wrapper {
+      margin-top: 15px;
+      padding: 20px;
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      border-radius: 12px;
+      color: white;
+      display: none;
+      animation: fadeIn 0.5s ease;
+    }
+
+    .audio-player-wrapper.active {
+      display: block;
+    }
+
+    .now-playing {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 15px;
+      font-weight: 600;
+    }
+
+    .now-playing-cover {
+      width: 50px;
+      height: 50px;
+      border-radius: 8px;
+      object-fit: cover;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    }
+
+    .now-playing-info {
+      flex: 1;
+    }
+
+    .now-playing-track {
+      font-size: 1.1rem;
+      margin-bottom: 5px;
+    }
+
+    .now-playing-artist {
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+
+    .custom-audio {
+      width: 100%;
+      height: 40px;
+      border-radius: 8px;
+      margin-top: 10px;
+    }
+
+    .back-btn {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 40px auto;
+      padding: 15px 25px;
+      background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 1.1rem;
+      box-shadow: 0 8px 25px rgba(46,100,200,0.2);
+      transition: all 0.3s ease;
+    }
+
+    .back-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(46,100,200,0.3);
+    }
+
+    footer.playlists-footer {
+      text-align: center;
+      padding: 30px 20px;
+      color: white;
+      background: var(--header-color);
+      margin-top: 50px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Enhanced Responsive Design */
+    @media (max-width: 768px) {
+      header.playlists-header {
+        padding: 30px 15px;
+      }
+      
+      header.playlists-header h1 {
+        font-size: 2rem;
+      }
+      
+      header.playlists-header p {
+        font-size: 1rem;
+      }
+      
+      .container {
+        padding: 0 15px 40px;
+        margin: 20px auto;
+      }
+      
+      .playlist-card {
+        padding: 20px;
+      }
+      
+      .playlist-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+      }
+      
+      .playlist-title {
+        font-size: 1.3rem;
+      }
+      
+      /* Mobile-optimized track layout */
+      .track {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+        padding: 20px;
+      }
+      
+      /* Wider cover images for mobile */
+      .track-cover {
+        width: 100%;
+        height: 180px;
+        align-self: center;
+        border-radius: 12px;
+      }
+      
+      .track-info {
+        width: 100%;
+      }
+      
+      .track-name {
+        font-size: 1.2rem;
+      }
+      
+      .track-artist {
+        font-size: 1rem;
+      }
+      
+      .actions {
+        width: 100%;
+        justify-content: space-between;
+      }
+      
+      .link-btn {
+        flex: 1;
+        justify-content: center;
+        padding: 12px 15px;
+        font-size: 1rem;
+      }
+      
+      .now-playing {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+      }
+      
+      .now-playing-cover {
+        width: 120px;
+        height: 120px;
+      }
+      
+      .back-btn {
+        width: 100%;
+        justify-content: center;
+        margin: 30px auto;
+        padding: 18px 25px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .playlist-card {
+        padding: 15px;
+      }
+      
+      .playlist-title {
+        font-size: 1.2rem;
+      }
+      
+      .track {
+        padding: 15px;
+      }
+      
+      .track-cover {
+        height: 150px;
+      }
+      
+      .actions {
+        flex-direction: column;
+        width: 100%;
+        gap: 10px;
+      }
+      
+      .link-btn {
+        width: 100%;
+        padding: 14px 15px;
+      }
+      
+      .audio-player-wrapper {
+        padding: 15px;
+      }
+      
+      .custom-audio {
+        height: 50px; /* Larger touch target for mobile */
+      }
+    }
+
+    /* For very small screens */
+    @media (max-width: 360px) {
+      .track-cover {
+        height: 130px;
+      }
+      
+      .track-name {
+        font-size: 1.1rem;
+      }
+      
+      .link-btn {
+        font-size: 0.95rem;
+      }
+    }
+
+    /* ===== Horizontal Playlist Slider (Improved for Mobile + Animation) ===== */
+.playlist-slider {
+  display: flex;
+  flex-wrap: wrap; /* make all buttons visible even on small screens */
+  justify-content: center;
+  gap: 10px;
+  padding: 10px 12px;
+  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+}
+
+.category-btn {
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.3);
+  color: #fff;
+  border-radius: 25px;
+  padding: 8px 16px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.category-btn:hover {
+  background: rgba(255,255,255,0.25);
+  transform: translateY(-2px);
+}
+.category-btn.active {
+  background: #fff;
+  color: var(--primary-color);
+  box-shadow: 0 4px 10px rgba(255,255,255,0.3);
+}
+
+/* Responsive tweaks for small screens */
+@media (max-width: 600px) {
+  .playlist-slider {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+  }
+  .category-btn {
+    padding: 7px 10px;
+    font-size: 0.85rem;
+  }
+}
+
+/* Fade + Slide animation for playlist cards */
+@keyframes fadeSlide {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.playlist-card.animate-show {
+  animation: fadeSlide 0.6s ease forwards;
+}
+
+  </style>
+</head>
+<body>
+
+  <header class="playlists-header">
+    <h1><i class="fas fa-music"></i> Gede'inxxe Farro Collection</h1>
+    <p>Sirboota aadaa fi sagalee aadaa ummata Gedeo, laqqa nna nossa 🎶</p>
+  </header>
+
+  <!-- Category Slider -->
+<div class="playlist-slider">
+  <button class="category-btn" data-target="all">🎶 Duuchcha</button>
+  <button class="category-btn" data-target="traditional">🎶 Barannotikka</button>
+  <button class="category-btn" data-target="cultural">🌿 Aadatikka</button>
+  <button class="category-btn" data-target="instruments">🥁 Miyatikka Farro</button>
+  <button class="category-btn" data-target="kids">👶 Oostikka</button>
+  <button class="category-btn" data-target="holiday">🎉 Ayyaantikka</button>
+</div>
+
+  <main class="container" id="all">
+
+    <!-- Playlist 1: Traditional Songs -->
+    <article class="playlist-card" id="traditional">
+      <div class="playlist-header">
+        <div class="playlist-title">
+          <i class="fas fa-drum playlist-icon"></i>
+          Barannotikka Gedeo Farro
+        </div>
+      </div>
+      
+      <p class="playlist-desc">
+        Authentic traditional music passed down through generations of Gedeo people.
+      </p>
+
+      <div class="tracks">
+        <!-- Track 1 -->
+        <div class="track">
+          <img src="../../../../Ged/Home/Gallery/img/st30.jpg" alt="Gedeo Welcome Song" class="track-cover">
+          <div class="track-info">
+            <div class="track-name">Gedeo Welcome Song</div>
+            <div class="track-artist">
+              <i class="fas fa-users"></i> Traditional Ensemble
+              <span class="track-duration">3:45</span>
+            </div>
+          </div>
+          <div class="actions">
+            <button class="link-btn drive-btn" data-audio="11FfnBmW10xJ1sThKM9Bz-ycvF4D93nom" data-track="Gedeo Welcome Song" data-artist="Traditional Ensemble" data-cover="../../../../Ged/Home/Gallery/img/st30.jpg">
+              <i class="fas fa-play-circle"></i> Geebessa
+            </button>
+            <a class="link-btn" href="https://drive.google.com/file/d/11FfnBmW10xJ1sThKM9Bz-ycvF4D93nom/view?usp=drive_link" target="_blank">
+              <i class="fas fa-download"></i> Deerse
+            </a>
+          </div>
+        </div>
+
+        <!-- Track 2 -->
+        <div class="track">
+          <img src="../../../../Ged/Home/Gallery/img/st3.jpg" alt="Harvest Celebration" class="track-cover">
+          <div class="track-info">
+            <div class="track-name">Harvest Celebration</div>
+            <div class="track-artist">
+              <i class="fas fa-seedling"></i> Gedeo Farmers
+              <span class="track-duration">4:20</span>
+            </div>
+          </div>
+          <div class="actions">
+            <button class="link-btn drive-btn" data-audio="1caQ9n3zqglOXK22hXbYTLYL4H901ZzVP" data-track="Harvest Celebration" data-artist="Gedeo Farmers" data-cover="../../../../Ged/Home/Gallery/img/st3.jpg">
+              <i class="fas fa-play-circle"></i> Geebessa
+            </button>
+            <a class="link-btn" href="https://drive.google.com/file/d/1caQ9n3zqglOXK22hXbYTLYL4H901ZzVP/view?usp=drive_link" target="_blank">
+              <i class="fas fa-download"></i> Deerse
+            </a>
+          </div>
+        </div>
+
+        <!-- Track 3 -->
+        <div class="track">
+          <img src="../../../../Ged/Home/Gallery/img/st9.jpg" alt="Wedding Ceremony Song" class="track-cover">
+          <div class="track-info">
+            <div class="track-name">Wedding Ceremony Song</div>
+            <div class="track-artist">
+              <i class="fas fa-ring"></i> Community Choir
+              <span class="track-duration">5:15</span>
+            </div>
+          </div>
+          <div class="actions">
+            <button class="link-btn drive-btn" data-audio="1zv0_ADy9DcGRGEyEVVDjKFvnPpu2oiQZ" data-track="Wedding Ceremony Song" data-artist="Community Choir" data-cover="../../../../Ged/Home/Gallery/img/st9.jpg">
+              <i class="fas fa-play-circle"></i> Geebessa
+            </button>
+            <a class="link-btn" href="https://drive.google.com/file/d/1zv0_ADy9DcGRGEyEVVDjKFvnPpu2oiQZ/view?usp=drive_link" target="_blank">
+              <i class="fas fa-download"></i> Deerse
+            </a>
+          </div>
+        </div>
+
+        <div class="audio-player-wrapper" id="audioPlayer1"></div>
+      </div>
+    </article>
+
+    <!-- Playlist 2: Cultural Sounds -->
+    <article class="playlist-card" id="cultural">
+      <div class="playlist-header">
+        <div class="playlist-title">
+          <i class="fas fa-tree playlist-icon"></i>
+          Dadummatika & Aadatikka Farro
+        </div>
+      </div>
+      
+      <p class="playlist-desc">
+        Natural sounds and cultural recordings from the Gedeo highlands.
+      </p>
+
+      <div class="tracks">
+        <!-- Track 1 -->
+        <div class="track">
+          <img src="../../../../Ged/Home/Gallery/img/st21.jpg" alt="Forest Morning Sounds" class="track-cover">
+          <div class="track-info">
+            <div class="track-name">New GD Sounds</div>
+            <div class="track-artist">
+              <i class="fas fa-mountain"></i> Gedeo Highlands
+              <span class="track-duration">2:30</span>
+            </div>
+          </div>
+          <div class="actions">
+            <button class="link-btn drive-btn" data-audio="1D_Rij2HzCwdWNRX2sSs_d1HS-4BxHrtH" data-track="Forest Morning Sounds" data-artist="Gedeo Highlands" data-cover="../../../../Ged/Home/Gallery/img/st21.jpg">
+              <i class="fas fa-play-circle"></i> Geebessa
+            </button>
+            <a class="link-btn" href="https://drive.google.com/file/d/1D_Rij2HzCwdWNRX2sSs_d1HS-4BxHrtH/view?usp=drive_link" target="_blank">
+              <i class="fas fa-download"></i> Deerse
+            </a>
+          </div>
+        </div>
+
+        <!-- Track 2 -->
+        <div class="track">
+          <img src="../../../../Ged/Home/Gallery/img/st22.jpg" alt="Traditional Storytelling" class="track-cover">
+          <div class="track-info">
+            <div class="track-name">Traditional Music</div>
+            <div class="track-artist">
+              <i class="fas fa-book"></i> Elder Narrator
+              <span class="track-duration">6:45</span>
+            </div>
+          </div>
+          <div class="actions">
+            <button class="link-btn drive-btn" data-audio="1zv0_ADy9DcGRGEyEVVDjKFvnPpu2oiQZ" data-track="Traditional Storytelling" data-artist="Elder Narrator" data-cover="../../../../Ged/Home/Gallery/img/st22.jpg">
+              <i class="fas fa-play-circle"></i> Geebessa
+            </button>
+            <a class="link-btn" href="https://drive.google.com/file/d/1zv0_ADy9DcGRGEyEVVDjKFvnPpu2oiQZ/view?usp=drive_link" target="_blank">
+              <i class="fas fa-download"></i> Deerse
+            </a>
+          </div>
+        </div>
+
+        <!-- Track 3 -->
+        <div class="track">
+          <img src="../../../../Ged/Home/Gallery/img/st54.jpg" alt="Forest Morning Sounds" class="track-cover">
+          <div class="track-info">
+            <div class="track-name">Haile Shallo Music</div>
+            <div class="track-artist">
+              <i class="fas fa-mountain"></i> Gedeo GKs
+              <span class="track-duration">2:30</span>
+            </div>
+          </div>
+          <div class="actions">
+            <button class="link-btn drive-btn" data-audio="1_w3D4PBNh-BJsJ629TeXdYlriHBM5xFj" data-track="Haile Shallo Music" data-artist="Gedeo Highlands" data-cover="../../../../Ged/Home/Gallery/img/st54.jpg">
+              <i class="fas fa-play-circle"></i> Geebessa
+            </button>
+            <a class="link-btn" href="https://drive.google.com/file/d/1_w3D4PBNh-BJsJ629TeXdYlriHBM5xFj/view?usp=drive_link" target="_blank">
+              <i class="fas fa-download"></i> Deerse
+            </a>
+          </div>
+        </div>
+        <div class="audio-player-wrapper" id="audioPlayer2"></div>
+      </div>
+    </article>
+
+    <!-- Playlist 3: Instrumental Music -->
+    <article class="playlist-card" id="instruments">
+      <div class="playlist-header">
+        <div class="playlist-title">
+          <i class="fas fa-guitar playlist-icon"></i>
+          Miyatikka Farro
+        </div>
+      </div>
+      
+      <p class="playlist-desc">
+        Music featuring traditional Gedeo instruments and melodies.
+      </p>
+
+      <div class="tracks">
+        <!-- Track 1 -->
+        <div class="track">
+          <img src="../../../../Ged/Home/Gallery/img/st52.jpg" alt="Kirar Melody" class="track-cover">
+          <div class="track-info">
+            <div class="track-name">Let`s Danice it</div>
+            <div class="track-artist">
+              <i class="fas fa-music"></i> Modern Musician
+              <span class="track-duration">3:15</span>
+            </div>
+          </div>
+          <div class="actions">
+            <button class="link-btn drive-btn" data-audio="1Q2irm4pk18Mos8a4ETSx4oLbIRtXGw-J" data-track="Let`s Danice it" data-artist="Traditional Musician" data-cover="../../../../Ged/Home/Gallery/img/st52.jpg">
+              <i class="fas fa-play-circle"></i> Geebessa
+            </button>
+            <a class="link-btn" href="https://drive.google.com/file/d/1Q2irm4pk18Mos8a4ETSx4oLbIRtXGw-J/view?usp=drive_link" target="_blank">
+              <i class="fas fa-download"></i> Deerse
+            </a>
+          </div>
+        </div>
+
+        <!-- Track 2 -->
+        <div class="track">
+          <img src="../../../../Ged/Home/Gallery/img/st29.jpg" alt="Drum Ensemble" class="track-cover">
+          <div class="track-info">
+            <div class="track-name">Drum Ensemble</div>
+            <div class="track-artist">
+              <i class="fas fa-drum"></i> Percussion Group
+              <span class="track-duration">4:05</span>
+            </div>
+          </div>
+          <div class="actions">
+            <button class="link-btn drive-btn" data-audio="1t7RSZU1d4kEgWym28OkTfj97gaPLAm_a" data-track="Drum Ensemble" data-artist="Percussion Group" data-cover="../../../../Ged/Home/Gallery/img/st29.jpg">
+              <i class="fas fa-play-circle"></i> Geebessa
+            </button>
+            <a class="link-btn" href="https://drive.google.com/file/d/1t7RSZU1d4kEgWym28OkTfj97gaPLAm_a/view?usp=drive_link" target="_blank">
+              <i class="fas fa-download"></i> Deerse
+            </a>
+          </div>
+        </div>
+
+        <!-- Track 3 -->
+        <div class="track">
+          <img src="../../../../Ged/Home/Gallery/img/st20.jpg" alt="Traditional Storytelling" class="track-cover">
+          <div class="track-info">
+            <div class="track-name">Your ❤ Music</div>
+            <div class="track-artist">
+              <i class="fas fa-book"></i> Dilla music
+              <span class="track-duration">6:45</span>
+            </div>
+          </div>
+          <div class="actions">
+            <button class="link-btn drive-btn" data-audio="1i4rAx3BZXD_b2uZenheqs62Y35Lb19TZ" data-track="Your ❤ Music" data-artist="Elder Narrator" data-cover="../../../../Ged/Home/Gallery/img/st20.jpg">
+              <i class="fas fa-play-circle"></i> Geebessa
+            </button>
+            <a class="link-btn" href="https://drive.google.com/file/d/1i4rAx3BZXD_b2uZenheqs62Y35Lb19TZ/view?usp=drive_link" target="_blank">
+              <i class="fas fa-download"></i> Deerse
+            </a>
+          </div>
+        </div>
+        <div class="audio-player-wrapper" id="audioPlayer3"></div>
+      </div>
+    </article>
+
+      <!-- Playlist 4: Celebration Music -->
+    <article class="playlist-card" id="darraro">
+      <div class="playlist-header">
+        <div class="playlist-title">
+          <i class="fas fa-music playlist-icon"></i>
+          Ayyaantikka Farro
+        </div>
+      </div>
+      
+      <p class="playlist-desc">
+        Music featuring Celebration Gedeo instruments and melodies.
+      </p>
+
+      <div class="tracks">
+        <!-- Track 1 -->
+        <div class="track">
+          <img src="../../../../Ged/Home/Gallery/img/darraro2.jpg" alt="Kirar Melody" class="track-cover">
+          <div class="track-info">
+            <div class="track-name">Kirar Melody</div>
+            <div class="track-artist">
+              <i class="fas fa-music"></i> Celebiration time Musician
+              <span class="track-duration">5:15</span>
+            </div>
+          </div>
+          <div class="actions">
+            <button class="link-btn drive-btn" data-audio="1A2zz9F_Ehl8NppdNB6TK-K5UljV2QcMT" data-track="Kirar Melody" data-artist="Traditional Musician" data-cover="../../../../Ged/Home/Gallery/img/darraro2.jpg">
+              <i class="fas fa-play-circle"></i> Geebessa
+            </button>
+            <a class="link-btn" href="https://drive.google.com/file/d/1A2zz9F_Ehl8NppdNB6TK-K5UljV2QcMT/view?usp=drive_link" target="_blank">
+              <i class="fas fa-download"></i> Deerse
+            </a>
+          </div>
+        </div>
+
+        <!-- Track 2 -->
+        <div class="track">
+          <img src="../../../../Ged/Home/Gallery/img/darraro.jpg" alt="Drum Ensemble" class="track-cover">
+          <div class="track-info">
+            <div class="track-name">Darraro with Ak</div>
+            <div class="track-artist">
+              <i class="fas fa-drum"></i> Percussion Group
+              <span class="track-duration">4:01</span>
+            </div>
+          </div>
+          <div class="actions">
+            <button class="link-btn drive-btn" data-audio="188hkivPDEB4gd1MnDg7qJoD2KA6r178g" data-track="Darraro with Ak" data-artist="Percussion Group" data-cover="../../../../Ged/Home/Gallery/img/darraro.jpg">
+              <i class="fas fa-play-circle"></i> Geebessa
+            </button>
+            <a class="link-btn" href="https://drive.google.com/file/d/188hkivPDEB4gd1MnDg7qJoD2KA6r178g/view?usp=drive_link" target="_blank">
+              <i class="fas fa-download"></i> Deerse
+            </a>
+          </div>
+        </div>
+
+        <!-- Track 3 -->
+        <div class="track">
+          <img src="../../../../Ged/Home/Gallery/img/st17.jpg" alt="Forest Morning Sounds" class="track-cover">
+          <div class="track-info">
+            <div class="track-name">Darraro Sounds</div>
+            <div class="track-artist">
+              <i class="fas fa-mountain"></i> Gedeo Highlands
+              <span class="track-duration">2:30</span>
+            </div>
+          </div>
+          <div class="actions">
+            <button class="link-btn drive-btn" data-audio="1DK6RZaEKi1GYcoGXo623F7V3-HJ7ipMh" data-track="Darraro Sounds" data-artist="Gedeo Highlands" data-cover="../../../../Ged/Home/Gallery/img/st17.jpg">
+              <i class="fas fa-play-circle"></i> Geebessa
+            </button>
+            <a class="link-btn" href="https://drive.google.com/file/d/1DK6RZaEKi1GYcoGXo623F7V3-HJ7ipMh/view?usp=drive_link" target="_blank">
+              <i class="fas fa-download"></i> Deerse
+            </a>
+          </div>
+        </div>
+        <div class="audio-player-wrapper" id="audioPlayer4"></div>
+      </div>
+    </article>
+
+
+    <div style="text-align: center;">
+      <button class="back-btn" onclick="location.href='history.html'">
+        <i class="fas fa-arrow-left"></i> Hisse Udduma
+      </button>
+    </div>
+
+  </main>
+
+  <br><br><br><hr>
+
+
+  <!-- FAB Bottom Navigation -->
+  <!-- FAB Bottom Navigation -->
+<nav class="bottom-nav">
+  <a href="../abc/abc.html" class="nav-link"><i class="fas fa-font"></i><span>Borro</span></a>
+  <a href="history.html" class="nav-link active"><i class="fas fa-history"></i><span>Raaga</span></a>
+
+  <div class="fab-container">
+    <button class="add-button" id="homeBtn"><i class="fas fa-home"></i></button>
+    <div class="fab-menu" id="fabMenu">
+      <a href="../../Gallery/gallery.html" class="fab-item" title="Gallery"><i class="fas fa-images"></i></a>
+      <a href="../../Video/video.htm" class="fab-item" title="Video"><i class="fas fa-video"></i></a>
+    </div>
+  </div>
+
+  <a href="../Calendar/calendar.html" class="nav-link"><i class="fas fa-calendar"></i><span>Barra</span></a>
+  <a href="../Color/colors.html" class="nav-link"><i class="fas fa-palette"></i><span>Hallo</span></a>
+</nav>
+
+<!-- Loading & Offline Overlays -->
+<div class="loading-overlay"><div class="loading-spinner"></div></div>
+
+<div class="offline-overlay" id="offlineOverlay">
+  <div class="offline-message">
+    <button class="close-offline" id="closeOffline">&times;</button>
+    <i class="fas fa-wifi-slash offline-icon"></i>
+    <h2>NO Internet!</h2>
+    <p>Please check your WiFi or mobile data connection</p>
+    <button class="retry-button">Retry</button>
+  </div>
+</div>
+
+<!-- Online Toast -->
+<div class="online-toast" id="onlineToast">
+  <i class="fas fa-wifi"></i> Back Online
+</div>
+
+<!-- Sounds -->
+<audio id="soundOnline" preload="auto">
+  <source src="data:audio/wav;base64,UklGRlIAAABXQVZFZm10IBAAAAABAAEA..." type="audio/wav">
+</audio>
+<audio id="soundOffline" preload="auto">
+  <source src="data:audio/wav;base64,UklGRlIAAABXQVZFZm10IBAAAAABAAEA..." type="audio/wav">
+</audio>
+
+  <button id="downArrowBtn" class="down-arrow-btn" aria-label="Scroll to bottom">
+    <i class="fas fa-chevron-down"></i>
+  </button>
+
+  <button id="upArrowBtn" class="up-arrow-btn" aria-label="Scroll to top">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <script src="../Down_icon/script22.js"></script>
+  <script src="script-nav.js"></script>
+    <script src="history_js.js"></script>
+  
+  <script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Animate cards when visible
+  const cards = document.querySelectorAll('.playlist-card');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, index) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), index * 200);
+      }
+    });
+  }, { threshold: 0.1 });
+  cards.forEach(card => observer.observe(card));
+
+  // All Play buttons
+  const playButtons = document.querySelectorAll('.drive-btn[data-audio]');
+
+  playButtons.forEach(button => {
+    button.addEventListener('click', function() {
+      const audioId = this.dataset.audio;
+      const trackName = this.dataset.track;
+      const artistName = this.dataset.artist;
+      const coverImage = this.dataset.cover;
+      const playlistCard = this.closest('.playlist-card');
+      const audioWrapper = playlistCard.querySelector('.audio-player-wrapper');
+
+      // Hide all other players
+      document.querySelectorAll('.audio-player-wrapper').forEach(wrapper => {
+        wrapper.classList.remove('active');
+        wrapper.innerHTML = '';
+      });
+
+      // Build Google Drive embed URL
+      const embedUrl = `https://drive.google.com/file/d/${audioId}/preview`;
+
+      // Build the player UI (added Close button)
+      audioWrapper.innerHTML = `
+        <div class="now-playing">
+          <img src="${coverImage}" alt="${trackName}" class="now-playing-cover">
+          <div class="now-playing-info">
+            <div class="now-playing-track">${trackName}</div>
+            <div class="now-playing-artist">${artistName}</div>
+          </div>
+          <i class="fas fa-volume-up" style="font-size: 1.2rem;"></i>
+        </div>
+
+        <div class="iframe-wrapper" style="
+          width: 100%;
+          background: #000;
+          border-radius: 12px;
+          overflow: hidden;
+          box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+        ">
+          <iframe 
+            src="${embedUrl}" 
+            width="100%" 
+            height="120" 
+            allow="autoplay" 
+            style="border: none; border-radius: 12px; display: block;"
+            loading="lazy">
+          </iframe>
+        </div>
+
+        <div style="margin-top: 10px; font-size: 0.9rem; opacity: 0.9; text-align: center;">
+          <i class="fas fa-info-circle"></i> Enjoy with Gedeo Music 😎
+        </div>
+
+        <div style="text-align: center; margin-top: 12px;">
+          <button class="close-player-btn" style="
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white;
+            border-radius: 8px;
+            padding: 8px 16px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+          ">
+            ✖ Close Player
+          </button>
+        </div>
+      `;
+
+      audioWrapper.classList.add('active');
+      audioWrapper.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+      // Close Player button functionality
+      const closeBtn = audioWrapper.querySelector('.close-player-btn');
+      closeBtn.addEventListener('click', () => {
+        audioWrapper.classList.remove('active');
+        audioWrapper.innerHTML = '';
+      });
+    });
+  });
+});
+
+    // === Category Filter with Animation + LocalStorage Memory ===
+const categoryButtons = document.querySelectorAll('.category-btn');
+const playlistCards = document.querySelectorAll('.playlist-card');
+
+// Restore last selected category (or default to "all")
+const savedCategory = localStorage.getItem('selectedCategory') || 'all';
+applyCategory(savedCategory);
+
+// Button click handler
+categoryButtons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const target = btn.dataset.target;
+    localStorage.setItem('selectedCategory', target); // save choice
+    applyCategory(target);
+  });
+});
+
+function applyCategory(target) {
+  // Update button active state
+  categoryButtons.forEach(b => {
+    b.classList.toggle('active', b.dataset.target === target);
+  });
+
+  // Show/hide playlist cards with fade-slide animation
+  playlistCards.forEach(card => {
+    card.classList.remove('animate-show'); // reset animation
+
+    if (target === 'all') {
+      card.style.display = 'block';
+      void card.offsetWidth; // restart CSS animation
+      card.classList.add('animate-show');
+    } else if (card.id === target) {
+      card.style.display = 'block';
+      void card.offsetWidth;
+      card.classList.add('animate-show');
+      card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      card.style.display = 'none';
+    }
+  });
+}
+
+
+</script>
+
+</body>
+</html>

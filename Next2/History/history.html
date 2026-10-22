@@ -1,0 +1,1308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GK | History Learning</title>
+    <link rel="stylesheet" href="history_style.css">
+    <link rel="stylesheet" href="../../../../fontawesome/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700&family=Comic+Neue&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../Nav1/style-nav.css">
+    <link rel="stylesheet" href="../Down_icon/styles22.css">
+    <link rel="icon" href="../../img/logo.png">
+    <style> 
+        header {
+    background: linear-gradient(135deg, #10418A, #4a6fa5);
+    color: white;
+    padding: 1rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    box-shadow: 0 4px 12px rgba(16, 65, 138, 0.3);
+    border-bottom: 3px solid #6E99D8;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-left: 20px;
+}
+
+.logo {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+header h1 {
+    font-size: 2.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(45deg, white, #e6e6ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-family: 'Baloo 2', sans-serif;
+}
+    .btn-container_2 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+    }
+
+ footer {
+    background: linear-gradient(135deg, #10418A, #4a6fa5);
+    color: white;
+    text-align: center;
+    padding: 1.5rem;
+    margin-top: auto;
+    border-top: 3px solid #6E99D8;
+}
+
+footer p {
+    font-size: 1.1rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+    .wide-btn {
+        width: 100%; /* Makes button as wide as its container */ 
+        max-width: 600px; /* Limits max width (adjust as needed) */
+        padding: 18px 30px;
+        font-size: 18px;
+        font-weight: bold;
+        color: #fff;
+        background: linear-gradient(135deg, var(--primary-color5), var(--secondary-color5));
+        border: none;
+        border-radius: 15px;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 6px 20px rgba(16, 65, 138, 0.4);
+        transition: all 0.3s ease;
+        transform: scale(1);
+        text-align: center;
+        display: block;
+        margin: 0 auto;
+        font-family: 'Comic Neue', sans-serif;
+        border: 2px solid var(--accent-color5);
+    }
+    
+    .wide-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(16, 65, 138, 0.6);
+        background: linear-gradient(135deg, var(--secondary-color5), var(--primary-color5));
+    }
+    
+    .wide-btn:active {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 15px rgba(16, 65, 138, 0.4);
+    }
+    
+    .wide-btn::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        transition: 0.5s;
+    }
+    
+    .wide-btn:hover::before {
+        left: 100%;
+    }
+    
+    .wide-btn.loading {
+        pointer-events: none;
+        background: linear-gradient(135deg, var(--primary-color5), #4a6fa5);
+    }
+    
+    .wide-btn.loading::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 0%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(110, 153, 216, 0.4), transparent);
+        animation: loading 3s linear forwards;
+        border-radius: 13px;
+    }
+    
+    @keyframes loading {
+        0% { width: 0%; }
+        100% { width: 100%; }
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .wide-btn {
+            padding: 16px 25px;
+            font-size: 16px;
+            border-radius: 12px;
+        }
+        
+        .btn-container_2 {
+            padding: 15px;
+        }
+    }
+    
+    @media (max-width: 480px) {
+        .wide-btn {
+            padding: 14px 20px;
+            font-size: 15px;
+            border-radius: 10px;
+            max-width: 100%;
+        }
+        
+        .btn-container_2 {
+            padding: 10px;
+        }
+    }
+    
+    /* Specific style for playlist button to differentiate it */
+    #playlistBtn {
+        background: linear-gradient(135deg, var(--secondary-color5), var(--accent-color5));
+        border: 2px solid var(--primary-color5);
+    }
+    
+    #playlistBtn:hover {
+        background: linear-gradient(135deg, var(--accent-color5), var(--secondary-color5));
+    }
+    
+    #playlistBtn.loading {
+        background: linear-gradient(135deg, var(--secondary-color5), #6E99D8);
+    }
+
+
+
+
+    /*Quiz and Playlist*/
+    .container_1 {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto; /* Center the container */
+}
+
+/* ONE ROW, TWO COLUMNS */
+.btn-row {
+    display: flex;
+    gap: 20px;
+    justify-content: center; /* Center buttons horizontally */
+    align-items: center; /* Center buttons vertically if needed */
+}
+
+/* Remove .btn-column entirely - not needed */
+/* .btn-column {
+    flex: 1;
+} */
+
+/* Button styling - MINIMIZED */
+.app-btn {
+    position: relative;
+    padding: 20px 15px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #fff;
+    background: linear-gradient(135deg, #10418a, #2d69c4);
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(16, 65, 138, 0.4);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    min-height: 160px;
+    width: 220px; /* FIXED WIDTH - not 100% */
+}
+
+/* Second button with different color */
+.app-btn.secondary {
+    background: linear-gradient(135deg, #8a1041, #c42d69);
+}
+
+/* Button hover effects */
+.app-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(16, 65, 138, 0.5);
+}
+
+.app-btn.secondary:hover {
+    box-shadow: 0 12px 25px rgba(138, 16, 65, 0.5);
+}
+
+/* Button content - MINIMIZED */
+.btn-icon {
+    font-size: 2.2rem;
+    margin-bottom: 15px;
+}
+
+.btn-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #fff;
+}
+
+.btn-desc {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.4;
+}
+
+/* Loading animation */
+.app-btn.loading {
+    pointer-events: none;
+    background: linear-gradient(135deg, #0d356f, #1e4a8a);
+}
+
+.app-btn.secondary.loading {
+    background: linear-gradient(135deg, #6a0c31, #9a2250);
+}
+
+.app-btn.loading::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    animation: loading 3s ease-in-out forwards;
+    border-radius: 15px;
+}
+
+@keyframes loading {
+    0% { width: 0%; }
+    100% { width: 100%; }
+}
+
+/* ALWAYS SIDE-BY-SIDE - MINIMIZED FOR MOBILE */
+@media (max-width: 768px) {
+    .container_1 {
+        max-width: 450px;
+    }
+    
+    .btn-row {
+        gap: 15px;
+    }
+    
+    .app-btn {
+        padding: 18px 12px;
+        min-height: 150px;
+        border-radius: 13px;
+        width: 200px; /* Smaller width */
+    }
+    
+    .btn-icon {
+        font-size: 2rem;
+        margin-bottom: 12px;
+    }
+    
+    .btn-title {
+        font-size: 1.3rem;
+    }
+    
+    .btn-desc {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .container_1 {
+        max-width: 400px;
+    }
+    
+    .btn-row {
+        gap: 12px;
+    }
+    
+    .app-btn {
+        padding: 15px 10px;
+        min-height: 140px;
+        border-radius: 12px;
+        width: 180px; /* Smaller width */
+    }
+    
+    .btn-icon {
+        font-size: 1.8rem;
+        margin-bottom: 10px;
+    }
+    
+    .btn-title {
+        font-size: 1.2rem;
+    }
+    
+    .btn-desc {
+        font-size: 0.75rem;
+    }
+}
+
+/* For very small screens */
+@media (max-width: 360px) {
+    .container_1 {
+        max-width: 340px;
+    }
+    
+    .btn-row {
+        gap: 10px;
+    }
+    
+    .app-btn {
+        padding: 12px 8px;
+        min-height: 130px;
+        border-radius: 10px;
+        width: 160px; /* Smaller width */
+    }
+    
+    .btn-icon {
+        font-size: 1.6rem;
+        margin-bottom: 8px;
+    }
+    
+    .btn-title {
+        font-size: 1.1rem;
+    }
+    
+    .btn-desc {
+        font-size: 0.7rem;
+        line-height: 1.3;
+    }
+}
+
+
+
+/* PDF Button Styles */
+    .pdf-btn {
+        background: linear-gradient(135deg, var(--primary-color5), var(--secondary-color5));
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 25px;
+        cursor: pointer;
+        font-family: 'Comic Neue', sans-serif;
+        font-weight: bold;
+        font-size: 0.95rem;
+        margin: 1rem 0 0.5rem;
+        display: inline-block;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        border: 2px solid transparent;
+        text-decoration: none;
+        text-align: center;
+    }
+
+    .pdf-btn:hover {
+        background: linear-gradient(135deg, var(--secondary-color5), var(--accent-color5));
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(16, 65, 138, 0.4);
+        color: white;
+    }
+
+    .pdf-btn i {
+        margin-right: 8px;
+        color: var(--accent-color5);
+    }
+
+    .pdf-btn:hover i {
+        color: white;
+    }
+
+    .btn-wrapper {
+        display: flex;
+        justify-content: flex-start;
+        margin-top: 15px;
+    }
+
+    .btn-wrapper.center {
+        justify-content: center;
+    }
+
+    .btn-wrapper.right {
+        justify-content: flex-end;
+    }
+
+    @media (max-width: 768px) {
+        .pdf-btn {
+            padding: 12px 24px;
+            font-size: 1rem;
+            width: 100%;
+        }
+        
+        .btn-wrapper {
+            justify-content: center;
+        }
+    }
+
+    /* Specific button for audio section */
+    .pdf-btn.audio-btn {
+        background: linear-gradient(135deg, var(--secondary-color5), var(--accent-color5));
+    }
+
+    .pdf-btn.audio-btn:hover {
+        background: linear-gradient(135deg, var(--accent-color5), var(--secondary-color5));
+    }
+
+
+
+
+
+
+
+
+
+/*Header style - for all device compatible responsive system*/
+@media (max-width: 992px) {   
+    header h1 {
+        font-size: 2.2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 1.8rem;
+    }
+    
+    .logo-container {
+        margin-left: 15px;
+        gap: 12px;
+    }
+    
+    .logo {
+        width: 45px;
+        height: 45px;
+    }
+
+@media (max-width: 576px) {
+    header h1 {
+        font-size: 1.6rem;
+    }
+    
+    .logo-container {
+        margin-left: 10px;
+        gap: 10px;
+    }
+    
+    .logo {
+        width: 40px;
+        height: 40px;
+    }
+    
+
+@media (max-width: 400px) {
+    header h1 {
+        font-size: 1.4rem;
+    }
+    
+    .logo-container {
+        gap: 8px;
+    }
+    
+    .logo {
+        width: 35px;
+        height: 35px;
+    }
+}
+
+/* Extra small devices (phones in portrait) */
+@media (max-width: 320px) {
+    
+    header h1 {
+        font-size: 1.2rem;
+    }
+    
+    .logo {
+        width: 30px;
+        height: 30px;
+    }
+}
+</style>
+
+</head>
+<body>
+
+    <div class="history-nav-container">
+    <nav class="history-nav-sidebar" id="historyNavSidebar">
+        <div class="history-nav-header">
+            <h2>Raaga Barrata</h2>
+            <div class="history-nav-subtitle">Explore Gedeo Heritage from below:</div>
+        </div>
+
+        <ul class="history-nav-links">
+            <li class="history-nav-item active" data-target="ancient">
+                <a href="#ancient" class="history-nav-link">
+                    <i class="fas fa-language history-nav-icon"></i>
+                    <span class="history-nav-text">Gedeo'Uffa Laagada</span>
+                    <span class="history-nav-badge"></span>
+                </a>
+            </li>
+            <li class="history-nav-item" data-target="green-land">
+                <a href="#green-land" class="history-nav-link">
+                    <i class="fas fa-tree history-nav-icon"></i>
+                    <span class="history-nav-text">Haanjaka Boga</span>
+                </a>
+            </li>
+                <li class="history-nav-item" data-target="sooddo">
+                    <a href="#sooddo" class="history-nav-link">
+                        <i class="fas fa-monument history-nav-icon"></i>
+                        <span class="history-nav-text">Gede'inxxe Sooddo</span>
+                    </a>
+                </li>
+                <li class="history-nav-item" data-target="abagada">
+                    <a href="#abagada" class="history-nav-link">
+                        <i class="fas fa-font history-nav-icon"></i>
+                        <span class="history-nav-text">About Abagada</span>
+                    </a>
+                </li>
+                <li class="history-nav-item" data-target="songs">
+                    <a href="#songs" class="history-nav-link">
+                        <i class="fas fa-music history-nav-icon"></i>
+                        <span class="history-nav-text">Gede'inxxe Faaro</span>
+                    </a>
+                </li>
+                <li class="history-nav-item" data-target="laws">
+                    <a href="#laws" class="history-nav-link">
+                        <i class="fas fa-balance-scale history-nav-icon"></i>
+                        <span class="history-nav-text">Seera & Galduma</span>
+                    </a>
+                </li>
+                <li class="history-nav-item" data-target="houses">
+                    <a href="#houses" class="history-nav-link">
+                        <i class="fas fa-home history-nav-icon"></i>
+                        <span class="history-nav-text">Minuwwa</span>
+                    </a>
+                </li>
+                <li class="history-nav-item" data-target="baalle">
+                    <a href="#baalle" class="history-nav-link">
+                        <i class="fas fa-users history-nav-icon"></i>
+                        <span class="history-nav-text">Baalle System</span>
+                    </a>
+                </li>
+                <li class="history-nav-item" data-target="darraro">
+                    <a href="#darraro" class="history-nav-link">&nbsp;
+                        <i class="fa-solid fa-fan history-nav-icon"></i> 
+                        <span class="history-nav-text">&nbsp;&nbsp;&nbsp;Darraro</span>
+                    </a>
+                </li>
+                <li class="history-nav-item" data-target="bedecha">
+                    <a href="#bedecha" class="history-nav-link">
+                        <i class="fas fa-user history-nav-icon"></i>
+                        <span class="history-nav-text">Bedecha Eudo</span>
+                    </a>
+                </li>
+        </ul>
+
+        <div class="history-nav-footer">
+            <p>Powered by:</p>
+            <div class="history-nav-logo">Gedeokids</div>
+        </div>
+    </nav>
+
+    <button class="nav-toggle" id="navToggle">
+        <i class="fas fa-chevron-right"></i>
+    </button>
+
+    <div class="history-nav-overlay" id="historyNavOverlay"></div>
+</div>
+
+    <header>
+        <div class="logo-container">
+            <img src="../../img/logo.png" alt="History Logo" class="logo">
+            <h1>Raaga Barrata</h1>
+        </div>
+    </header>
+
+    <main class="history-container">
+        <section id="ancient" class="history-section">
+            <div class="full-width-header">
+                <h2>Gedeo'Uffa Laagada</h2>
+                <p>Discover the beginnings of human civilization</p>
+            </div>
+            
+            <div class="history-content">
+                <figure class="history-figure float-right">
+                    <img src="Ged/laagada.png" alt="Pyramids">
+                    <figcaption>What is Language or "Laagada"</figcaption>
+                </figure>
+                
+                <p>Ancient history covers all continents inhabited by humans from 3000 BC to AD 500. The three-age system periodizes ancient history into the Stone Age, Bronze Age, and Iron Age.</p>
+                
+                <p>Early human civilizations first developed in Mesopotamia, Ancient Egypt, Ancient India, and Ancient China. These civilizations developed writing systems, built monumental architecture, and made significant advances in mathematics and astronomy.</p>
+                
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h3>Laagadinxxa መዋቅር</h3>
+                        <p>Invention of writing in Mesopotamia. These civilizations developed writing systems, built monumental architecture, and made significant </p>
+                    </div>
+                    <div class="timeline-item">
+                        <h3>Laagadinxxa ክፍሎች</h3>
+                        <p>Great Pyramid of Giza completed. These civilizations developed writing systems, built monumental architecture, and made significant </p>
+                    </div>
+                    <div class="timeline-item">
+                        <h3>Laagadinxxa ጥቅም</h3>
+                        <p>Bronze Age collapse in Mediterranean. These civilizations developed writing systems, built monumental architecture, and made significant </p>
+                    </div>
+                </div>
+
+                <!-- Add this after the timeline div in the ancient section -->
+<div class="btn-wrapper">
+    <a href="pdf-page.html#language" class="pdf-btn" onclick="this.classList.add('loading'); this.innerHTML='<i class=\'fas fa-spinner fa-spin\'></i> Loading PDF...'">
+        <i class="fas fa-file-pdf"></i> Gedeo'Uffa Language PDF
+    </a>
+</div>
+
+            </div>
+        </section>
+
+        <!-- NEW: Auto-Transition Banner (Between 1 & 2) -->
+        
+        <section id="green-land">
+            <div class="full-width-header">
+                <h2>Haanjaka Boga</h2>
+                <p>Explore the Middle Ages from 500 to 1500 AD</p>
+            </div>
+             
+              <div class="history-content">
+                <figure class="history-figure float-right">
+                    <img src="Ged/boga.png" alt="Pyramids">
+                    <figcaption>Green Land in Gedeo Zone area</figcaption>
+                </figure>
+                
+                <div class="text-content">
+    <div class="short-text">
+        <p> <b>"Gedeo green land"</b> refers to the Gedeo Zone in Ethiopia, a landscape dominated by a unique and ancient agroforestry system where the Gedeo people cultivate coffee and enset (a banana-like plant) alongside diverse tree species. This system is known for its high biodiversity and sustainability, which is further protected by the Gedeo people's strong cultural traditions that emphasize environmental protection, including strict rules against deforestation and a spiritual connection to the forest. <br><br>
+                
+                <b>Crops:</b> The system's main components are enset and coffee, which are crucial for the food security of the community. <br>
+                <b>Biodiversity:</b> Each 100m² plot can host a high diversity of trees, with up to 50 species from 35 families. 
+                <b>Sustainability:</b> This method of land use has sustained the population for generations and is recognized as a sustainable land management system.  
+
+                Ancient history covers all continents inhabited by humans from 3000 BC to AD 500. The three-age system periodizes ancient history into the Stone Age, Bronze Age, and Iron Age.</p>
+    </div>
+    <div class="full-text">
+        <p>Early human civilizations first developed in Mesopotamia, Ancient Egypt, Ancient India, and Ancient China. These civilizations developed writing systems, built monumental architecture, and made significant advances in mathematics and astronomy.</p>
+    </div>
+
+<button class="read-more-btn">Read More <i class="fas fa-chevron-down"></i></button>
+            </div>    
+                
+                <!-- Add this after the read-more-btn div in the green-land section -->
+<div class="btn-wrapper">
+    <a href="pdf-page.html#green-land" class="pdf-btn" onclick="this.classList.add('loading'); this.innerHTML='<i class=\'fas fa-spinner fa-spin\'></i> Loading PDF...'">
+        <i class="fas fa-file-pdf"></i> Green Land Conservation PDF
+    </a>
+</div>  
+
+            </div>
+        </section>
+        
+        <section id="transition-banner" class="auto-transition">
+             
+            <div class="banner-slide active" style="background-image: url('Ged/green.jpg')">
+                <div class="banner-content">
+                    <h2>Our Green Land</h2>
+                    <p>The Gedeo peoples are very good keeping Forest...</p>
+                </div>
+            </div>
+            
+            <div class="banner-slide" style="background-image: url('Ged/cloth.jpg')">
+                <div class="banner-content">
+                    <h2>Cultural Clothes</h2>
+                    <p>The Gedeo people have owned cultural clothes, designed by them...</p>
+                </div>
+            </div>
+            
+            <div class="banner-slide" style="background-image: url('Ged/system.jpg')">
+                <div class="banner-content">
+                    <h2>Geda System</h2>
+                    <p>The Gedeo people and land ruled by their own culture...</p>
+                </div>
+            </div>
+            
+            <div class="banner-slide" style="background-image: url('Ged/land.jpg')">
+                <div class="banner-content">
+                    <h2>Land Form</h2>
+                    <p>The Gedeo people land and UNESCO...</p>
+                </div>
+            </div>
+            
+            <div class="banner-slide" style="background-image: url('Ged/people.jpg')">
+                <div class="banner-content">
+                    <h2>Gedeo People</h2>
+                    <p>The Peoples are more beautiful and diversity of culture land...</p>
+                </div>
+            </div>    
+            
+           <!-- Add 3 more slides -->
+        </section>
+
+        <!-- SECTION 2: Medieval World (Existing) -->
+        <section id="baalle" class="history-section">
+            <div class="full-width-header">
+                <h2>Gede'inxxe “Baalle” System</h2>
+                <p>Gedeo "Baalle" System and What do it.</p>
+            </div>
+            
+            <div class="history-content">
+                <figure class="history-figure float-left">
+                    <img src="Ged/gada.png" alt="Medieval Castle">
+                    <figcaption>Gedeo "Baalle" System and What do it.</figcaption>
+                </figure>
+                <p>The Middle Ages saw the rise and fall of empires, the spread of religions, and significant developments in art and architecture. This period includes the Byzantine Empire, Islamic Golden Age, and European feudal systems.</p>
+                
+                <p>Important events include the Crusades, the Black Death, and the beginning of the Renaissance. Medieval technology saw the invention of mechanical clocks, windmills, and advances in agriculture.</p>
+            
+
+                <div class="card-container">
+                    <div class="history-card">
+                        <img src="Ged/gada1.jpg" alt="Viking Ship">
+                        <h3>Abba Gada “1”</h3>
+                        <p>793-1066 AD: Norse seafarers explored and settled across Europe <br> This period includes the Byzantine Empire, and European feudal systems.</p>
+                    </div>
+                    <div class="history-card">
+                        <img src="Ged/gada2.jpg" alt="Samurai">
+                        <h3>Abba Gada “2”</h3>
+                        <p>1185-1603: Age of the samurai and shogun rule <br> This period includes the Byzantine Empire, Islamic Golden Age.</p>
+                    </div>
+                </div>
+
+                <!-- Add this after the card-container in the gada-system section -->
+<div class="btn-wrapper center">
+    <a href="pdf-page.html#baalle" class="pdf-btn" onclick="this.classList.add('loading'); this.innerHTML='<i class=\'fas fa-spinner fa-spin\'></i> Loading PDF...'">
+        <i class="fas fa-file-pdf"></i> Baalle System Guide PDF
+    </a>
+</div>
+
+            </div>
+        </section>
+
+        <!-- NEW: 3-Card Section (Between 2 & 3) -->
+        <section id="sooddo" class="history-section">
+            <div class="full-width-header">
+                <h2>Gede'inxxe “Sooddo”</h2>
+                <p>Key developments from 500-1500 AD</p>
+            </div>
+            <div class="history-content">
+                <div class="card-container">
+                    <div class="history-card">
+                        <img src="Ged/so1.jpg" alt="Castle">
+                        <h3>Tututi Steles</h3>
+                        <p>The Renaissance, Industrial Revolution, and Digital Age have transformed how we live, work, and communicate</p>
+                    </div>
+                    <div class="history-card">
+                        <img src="Ged/so2.jpg" alt="Vikings">
+                        <h3>Tuto-Fela Steles</h3>
+                        <p>The Renaissance, Industrial Revolution, and Digital Age have transformed how we live, work, and communicate</p>
+                    </div>
+                    <div class="history-card">
+                        <img src="Ged/so3.jpg" alt="Samurai">
+                        <h3>Chelba Tututi Steles</h3>
+                        <p>The Renaissance, Industrial Revolution, and Digital Age have transformed how we live, work, and communicate</p>
+                    </div>
+                </div>
+
+                <!-- Add this after the card-container in the sooddo section -->
+<div class="btn-wrapper right">
+    <a href="pdf-page.html#sooddo" class="pdf-btn" onclick="this.classList.add('loading'); this.innerHTML='<i class=\'fas fa-spinner fa-spin\'></i> Loading PDF...'">
+        <i class="fas fa-file-pdf"></i> Sooddo Steles Research PDF
+    </a>
+</div>
+
+            </div>
+        </section>
+
+        <!-- NEW: Renaissance Section (Like Section 2) -->
+        <section id="abagada" class="history-section">
+            <div class="full-width-header">
+                <h2>About “Abagada”</h2>
+                <p>Rebirth of art and science (14th–17th century)</p>
+            </div>
+            <div class="history-content">
+                <figure class="history-figure float-right">
+                    <img src="Ged/Aba.png" alt="Renaissance Art">
+                    <figcaption>What is Abagada? or "Baalle" in Gedeo</figcaption>
+                </figure>
+                <p> Baalle is a traditional, indigenous democratic system of governance for the Gedeo people in Ethiopia, regulating political, social, economic, and religious life. <br> It is a rotational system where leadership changes every eight years, and it is based on principles of accountability, consensus-building, and conflict resolution. The system is organized into age-based classes that progress through a series of grades.
+
+                <br> <b>Leadership:</b> The peak of the Gadaa grade is considered the stage of full political maturity, which occurs around age 40. The leader, known as the Abba Gada, holds power for eight years and is responsible for unifying the peopl
+
+                    <br><br> The Renaissance period marked a cultural rebirth. The Middle Ages saw the rise and fall of empires, the spread of religions, and significant developments in art and architecture. This period includes the Byzantine Empire, Islamic Golden Age, and European feudal systems. <br><br> Important events include the Crusades, the Black Death, and the beginning of the Renaissance. Medieval technology saw the invention of mechanical clocks, windmills, and advances in agriculture.</p>
+
+                    <!-- Add this at the end of the history-content div in abagada section -->
+<div class="btn-wrapper">
+    <a href="pdf-page.html#abagada" class="pdf-btn" onclick="this.classList.add('loading'); this.innerHTML='<i class=\'fas fa-spinner fa-spin\'></i> Loading PDF...'">
+        <i class="fas fa-file-pdf"></i> Abagada & Gada System PDF
+    </a>
+</div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: Modern Era (Existing) -->
+        <section id="songs" class="history-section">
+            <div class="full-width-header">
+                <h2>Gede'inxxe National Song</h2>
+                <p>From the Renaissance to the present day</p>
+            </div>
+            
+            <div class="history-content">
+                <p> The Modern Era has seen unprecedented changes in human society. The Renaissance, Industrial Revolution, and Digital Age have transformed how we live, work, and communicate.</p>
+
+                    <h3>Ethiopian National Song:</h3>
+                    <center>Respect for citizenship is strong in our Ethiopia; <br>
+                    National pride is seen, shining from one side to another. <br>
+                    For peace, for justice, for the freedom of peoples, <br>
+                    In equality and in love we stand united. <br>
+                    Firm of foundation, we do not dismiss humanness; <br>
+                    We are peoples who live through work. <br>
+                    Wonderful is the stage of tradition, mistress of proud heritage, <br>
+                    Mother of natural virtue, mother of a valorous people. <br>
+                    We shall protect you – we have a duty; <br>
+                    Our Ethiopia, live! And let us be proud of you! <br><br></center> 
+                
+                <figure class="history-figure full-width">
+                    <img src="Ged/Song.png" alt="Industrial Revolution">
+                    <figcaption>Gedeo's People National Songs</figcaption>
+                </figure>
+    <br><br>
+                
+<!-- In your "Gedeo's National Song" section, replace the audio with this: -->
+<div class="custom-audio-player">
+  <audio id="gedeoAudio">
+    <source src="../../../../En/Home/Next2/History/et.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+  <div class="player-controls">
+    <button id="playPauseBtn" class="control-btn">
+      <i class="fas fa-play"></i>
+    </button>
+    <div class="progress-container">
+      <div class="progress-bar">
+        <div class="progress"></div>
+      </div>
+      <div class="time-display">
+        <span class="current-time">0:00</span>
+        <span class="duration">0:00</span>
+      </div>
+    </div>
+    <button id="muteBtn" class="control-btn">
+      <i class="fas fa-volume-up"></i>
+    </button>
+  </div>
+</div>
+
+
+    <div class="btn-container_2">
+    <button class="wide-btn" id="amharicBtn"
+        onclick="window.location.href='playlists.html'">
+        Gede'inxxe Playlists 🎧
+    </button>
+</div>
+    
+                
+    </div>
+        </section>
+        
+        <section id="laws" class="history-section">
+            <div class="full-width-header">
+                <h2>Gede'inxxe Seera & Galduma</h2>
+                <p>Explore the Middle Ages from 500 to 1500 AD</p>
+            </div>
+            
+            <div class="history-content">
+                <figure class="history-figure float-left">
+                    <img src="Ged/seera.png" alt="Medieval Castle">
+                    <figcaption>Gedeo People Rules, Laws and their Regulation</figcaption>
+                </figure>
+                
+                <div class="text-content">
+    <div class="short-text">
+        <p> <b>There are 45 Laws</b> <br><br> 
+
+        1. Gede’iixe aada’n ci’atika quuphphe shiyya cubboten. Iitta kaddoole ilendaaxxi anno rertaan/baxxaab hiyyende addatendammaxxeeten.                                                   
+ <br> <br>
+2. Hirreessiinxa haqqe mini’a adhdhe e’yya haranga hoyyendeexxen. Hirreessiinxa giira giidhdhinoole finni gosa muddaan hine sodaantammaxxeete.                                                   
+ <br> <br>
+3. Hashsha qe’ya woxedha,umo haaxxa,seemma gophpha, mine fiya,gaffe hoyyendeexxen buutotinna hiyyumma ye’atishshaten hine addantammaxxeeten. 
+ <br> <br>
+4. Manji mitti nage’iinke mine’n seemma haguulqe e’yya haranga hoyyendeexxen.E’yyeechchi udumanna haguuggo tilqa giddeten kada gophphoole farotishsha uudendaan. 
+ <br> <br>
+5. Miniinxi ama miniinke annikanna amaka summa bira he’nee’naanna kadi he’nnebaak ye’a hoyyendeexxen.
+ <br> <br>
+6. Meyyaxxi belto seerik miniinxe ama kadatee hachcho hiyyemaake Weeshiinke wodi’inni aanshedha hasissaan. 
+ <br> <br>
+7. Miniinxi ama haleenshita’n miniinke annike anninni afendoole hadi’a wirri hitee aaggaa malee saxxe metabaan. Magenokenaa’n ergemeeke araarishsha laakko’endaan. 
+ <br> <br>
+8. Miniinke anniki anni galchaaxxe songonaa’n miniixi ama qaxxaamurtaa wodda miniinke annik anni bira hedhenna hedhanna gophee “anke anna balleesseenne seera ani’a uwwi” hitebaak qaxxaamurtabaan. 
+ <br> <br>
+9. Manjiin belti biniinchik welti maaliinxa afensha assabbaan, asseexxe kaddoole farotishsha laakko’endaan. 
+ <br> <br>
+10. Anno ilendeechchi uduma ha’nura ibbeebaak shuta haandebaakinna summa fulchinebaak baxxoole wo’mmi manjishsha laakko’a gonphammaxxee hirreessake’n moogendabaan. “Qarra” hinaaxxe bakka’n imarree ugginaa malee.
+ <br> <br>
+11. Meyyaxxi belto aanshi mini giddike miya’n dagoole farratishsha laakko’endammaxxe miyi iki hunemaan.  <br> <br>
+12. Ayyinna kakkichcho gosha hoyyendeexxen. Isoo gosheeke manjixxi finninna gosa goshendaan, illetinna baxxaan hine addantammaxxeeten.  <br> <br>
+13. Dayyo dayyo badindoole elochchobaan weeshshiinka muuxxichcho goshshe badindoole meyyaxxa male ilendabaan hine addantaan. 
+ <br> <br>
+14. Miniinxe amaxxi ama lubbendoole beltotik miniink anni bale giddonna uggaba buttinanna buyyabaan.  <br> <br>15. Lame miniinxa ama afeeki miniinki anni mitte miniinxi ama lubbendoole tazgaari fule ke’ebaak lubboti hexxeexxe miniinxe amanni maaliinxa afensha assabaan. 
+ <br> <br>
+16. Mitti manji labbaka belto I’lebaak lubbemoole fichchi isik woddeessiinke fichcha hiyyemati ye’emaan.Fichcha okkonenaa’ninna haqichchokanna adhdhinabaan. Buutotinna wogga haruunsaan hine hendammaxxeeten. 
+ <br> <br>
+17. Manji adamo fulee’na adamoke’n biniichik welti lubbemoole miyi isiki adhdhemabaan okkoonni hunemaan. 
+ <br> <br>
+18. Miniink anni miniinxa ama lolaa’na mete mososso,gaadi’a e’yyitoole, ma’ni’a baqattoole lola waala giddeten. Buutotinna mososso,ma’nanna gaadi lumoka ulfinna afeechcho kadeexxeeten. 
+ <br> <br>
+19. Wo’di’i fulee’na olla’I reebe xorseechchi uduma haqqe gubateeke minxxa adhdhaaki hedhebaan. Buutotinna gubateeke minixxi haqe mine e’yitoole giiratixxa bala geessissabaashshaten. 
+ <br> <br>
+20. Mini gubatee’na wodi’I fulee male gubatee hinabaan. Buutotinna giirati halo abida gonphammaxxeeten. 
+ <br> <br>
+</p>
+    </div>
+    <div class="full-text">
+        <p>21. Meyyaxxi belto ciniintoti lubbendoole ciniintoti rertee hinabaan, duuloke’n lubbendeen hinaa malee. 
+ <br> <br>
+22. Anno ilendeechchi uduma ha’nura ibbebaak summi fulebaak shuta haandabaan. Buutotinna wo’mma manjo hine heda gonphammaxxeeten. 
+ <br> <br>
+23. Ayyi manjinna bofa shiyeechchi uduma shiye butta uggabaan harichoke’n qarabaa malee. Buutotinna bofi muuxate ke’eexxe kaddoole shimmaki annichchi reyaan hine addantammaxxeeten. 
+ <br> <br>
+24. Gede’iine aada’n badhaasakeenna kaddi muratee moja uunaarabaan. Buutotinna moji xe’yyake kademmaxxe xe’ya wodo idaggaan hine addantammaxxeeten. 
+ <br> <br>
+25. Gede’iinke seera’n gaaffeti lomuki shiixxooka miicoolenna gattowwaal hiyyi malee ati balleessiteetten hinabaan. 
+ <br> <br>
+26. Gadichchiink belti yookin miniinxi ama lubbendoole gatexxe hulanaa’n malee edii’n reenshi fulabaan. Gadichchikinna oodhabaan buutotinna gadichchi ardiinke malee isixxe maateke calla kada gophemmaxxeeten, oodhoole manji mudaan hine addantammaxxeeten. 
+ <br> <br>
+27. Mitti manji ibeechcho buttii’n afeexxe kaddoole adhdhe mini’a aagabaan, sase weldeenna’n ugginaa malee. <br> <br>
+28. Gede’iinxe aada’n manji mitti ileme kalaale geyeechchi uduma gosa ifixxa aadhaarabaan. Buutotinna wogga insa’nexxi haru’mitaan ittan finni insa’nekinna nophphabaan hine hendammaxxeeten. 
+ <br> <br>
+29. Angafi labbaki belti anniinke ofo’lichcho’n ofo’laarabaan buutotinna angafi woraashete kademmaxxe anni lubboti hedhee’naa worassa farraten kaddemmaxxeeten. 
+ <br> <br>
+30. Gede’iinxe aada’n angafi hedhee’na udumik riqichcha foofabaan. Buuto lumollakee uunaannoke ulfinnan. 
+ <br> <br>
+31. Maate giddo anni he’nee’na belti edise anga aanshedhabaan,anni aanshedheeke wode’e’ninna hana aanshedhabaan. Buutotinna belti anniinxe shi’na hine addantammaxxeeten. 
+ <br> <br>
+32. Gede’iinxe aada’n moori haranga gibemeechchon, kaddaa’naanni mitti raakkichchi manji waasa mooreexxi leedde bire uggoole, fira isike kadeexxa annichchi ege’naan hoolanna assisabaan. 
+ <br> <br>
+33. Oodhishshati mine’n ita angii’n ibbee’na adhdhinaarabaan buutotinna rewo aadhe aagaan hine sodaantammaxxeeten. 
+ <br> <br>
+34. Anninna ama indaa’na ita gudeeda insa’neke’n yookin ma’naten ibboole adhdhine indabaan oosetee uunaan buutotinna oose gudeediinxe gumman hine hendammaxxeeten. 
+ <br> <br>
+35. Anniinxe’n yookin akka’iinxe oone’n mine ijaadhdha hoyyendeexxen. Buutotinna wogga haru’mitaaan hine addantammaxxeeten. 
+ <br> <br>
+36. Mine ijaarraa wodda buttina fannaa wodda mososso ontammaxxe bakka’n weeshsho kaansaan, kada gophphoole eloxxi wodo geltabaan hine addantammaxxeeten. 
+ <br> <br>
+37. Mitti manji aadhaa wodda taakkaka weeshshiinka hochcho fayaaki manji “jaalo” hiyyeme ye’emaake kadaa wodda. Jaaloyyon mitte ma’naninna galloole maaliinxa afensha assa haranga cubbotenna farraten hine addantaan. 
+ <br> <br>
+38. Wodi’I adhdheeka manjo galaaniin qarqara moongaa male mini’a adhdhine aangabaan. Buutotinna wode’eke’n halo abixxa gonphammaxxeeten. 
+ <br> <br>
+39. Mini ijaarraa wodda miniinxe mososso’a bita’i gama’n hexxeexxa kuta meyyaxxee unaan. Buutotinna meyyaxxi labbakixxe bita’i gama hiyyendammaxxeeten. 
+ <br> <br>
+40. Aadheeki belti anniinxe ma’na’n diiphabaan. 
+ <br> <br>
+41. Heerundeexxi belto amati wolti diiphphabaan anniinxe ma’nna’ninna diiphphabaan, beltikinna beltotik anninni hoone jeejinninna diiphaachchobbaan. 
+ <br> <br>
+42. Gede’iinxe aada’n labbaka malee meyyaxxi jila ofoldaabaan, buutotinna ciniintotixxe yanna’n rakkattaan hine hendammaxxeten.
+ <br> <br>
+43. Odhishshatixxe yanna’n maate saami hite ooxxabaa, anno baxxoole”bushoottee”, dargageessi reyoole”lubbemee” lumo manji reyoole “hancufa liqiinse” hinaan, lumolli he’nee’na oosichchi oodhishsha safabaan, safoole gara affebaaxxi oodhishsha rewote yexxaan hine addantammaxxeeten. <br> <br></p>
+    </div>
+
+<button class="read-more-btn">Read More <i class="fas fa-chevron-down"></i></button>
+            </div> 
+                
+                <!-- Add this at the end of the history-content div in laws section -->
+<div class="btn-wrapper">
+    <a href="pdf-page.html#laws" class="pdf-btn" onclick="this.classList.add('loading'); this.innerHTML='<i class=\'fas fa-spinner fa-spin\'></i> Loading PDF...'">
+        <i class="fas fa-file-pdf"></i> 45 Laws of Gedeo PDF
+    </a>
+</div>
+              
+            </div>
+        </section>
+
+        <!-- NEW: Industrial Revolution Section -->
+        <section id="houses" class="history-section">
+            <div class="full-width-header">
+                <h2>Gede'inxxa Minuwwa</h2>
+                <p>1760-1840: The age of machines</p>
+            </div>
+            <div class="history-content">
+                <figure class="history-figure float-left">
+                    <img src="Ged/house.png" alt="Steam Engine">
+                    <figcaption>Gedeo People House or "Gede'inxxa Minuwwa"</figcaption>
+                </figure>
+                <p><p> Read all about the 15 different styles of Ethiopian Houses, their shapes, what they are made off, etc., like the sophisticated traditional woven houses of the Dorze or the stacked wall houses of Berhale. The Dorse houses are completely woven houses from the leaves of false bananas over a structure of bent branches. According to the villagers, the bottom parts of the huts are eaten by termites and over the decades, they slowly lose height and width; eventually they are used as utility shags. <br><br>
+
+                Traditional Ethiopian houses, often called tukuls, are built using local materials like wood, mud, and thatch. Construction typically involves building a circular or rectangular frame, then filling the walls with mud mixed with straw and dung, and topping it with a conical, thatched roof. The process can vary depending on the region, with some homes also using stones for foundations and walls.
+
+                <br><br> The transition to new manufacturing processes...The Middle Ages saw the rise and fall of empires, the spread of religions, and significant developments in art and architecture. This period includes the Byzantine Empire, Islamic Golden Age, and European feudal systems.<br>
+            The Middle Ages saw the rise and fall of empires, the spread of religions, and significant developments in art and architecture. </p>
+
+            <!-- Add this after the comparison div in the houses section -->
+<div class="btn-wrapper right">
+    <a href="pdf-page.html#houses" class="pdf-btn" onclick="this.classList.add('loading'); this.innerHTML='<i class=\'fas fa-spinner fa-spin\'></i> Loading PDF...'">
+        <i class="fas fa-file-pdf"></i> Gedeo House PDF
+    </a>
+</div>
+
+            </div>
+            <div class="comparison">
+                    <div class="before">
+                        <h3>Shoole Baxxe</h3>
+                        <ul>
+                            <li>Darashsha</li>
+                            <li>Gorgonsha</li>
+                            <li>Hanuma</li>
+                            <li>Doobba'a</li>
+                        </ul>
+                    </div>
+                    <div class="after">
+                        <h3>Sasa Baxxe</h3>
+                        <ul>
+                            <li>Hemba'a</li>
+                            <li>Logoda</li>
+                            <li>Bakarro</li>
+                        </ul>
+                    </div>
+                </div>
+        </section>
+
+        <!-- About Darraro -->
+        <section id="darraro" class="history-section">
+            <div class="full-width-header">
+                <h2>About “Darraro”</h2>
+                <p>It is a Celebration of Growth and Prosperity</p>
+            </div>
+            <div class="history-content">
+                <figure class="history-figure float-right">
+                    <img src="Ged/Darraro.png" alt="Renaissance Art">
+                    <figcaption>This holiday known as a New Year.</figcaption>
+                </figure>
+                <p> The Gedeo people's New Year is called Dararo. The name means "to cross over" and symbolizes the transition from hardship to abundance, marking a new agricultural cycle after the coffee harvest. Celebrations include cultural events, dances, feasts, and gatherings for thanksgiving and to pray for the new season. <br>
+        <b>Symbolism:</b> Dararo, which can also mean "flower," signifies the start of a new cycle and the beauty of the season. <br>
+        <b>Timing:</b> It is celebrated after the coffee harvest, typically in January or February. <br><br>
+        <b>Activities:</b> <br>
+        - Gathering at sacred sites like Michille Grissa for rituals and blessings. <br>
+        - Feasting, dancing, and music. <br>
+        - Organizing symposiums on Gedeo culture and language. <br>
+        - Praying to the supreme god, Megeno, for protection and favor. <br>
+        - Preparing for the upcoming farming season. <br>
+        <b>Location:</b> The celebrations often conclude in the administrative capital, Dilla, but are celebrated across the Gedeo Zone.
+
+                    <br><br> This period includes the Byzantine Empire, Islamic Golden Age, and European feudal systems. The Renaissance period marked a cultural rebirth. The Middle Ages saw the rise and fall of empires, the spread of religions, and significant developments in art and architecture. <br><br> Important events include the Crusades, the Black Death, and the beginning of the Renaissance. Medieval technology saw the invention of mechanical clocks, windmills, and advances in agriculture.</p>
+
+        <br>
+                    <!-- Add this at the end of the history-content div in darraro section -->
+<div class="btn-wrapper center">
+    <a href="pdf-page.html#darraro" class="pdf-btn" onclick="this.classList.add('loading'); this.innerHTML='<i class=\'fas fa-spinner fa-spin\'></i> Loading PDF...'">
+        <i class="fas fa-file-pdf"></i> Darraro Festival Guide PDF
+    </a>
+</div>
+
+            </div>
+        </section>
+
+<section id="bedecha">
+     <div class="full-width-header">
+                <h2>Bedecha Eudo</h2>
+                <p>Explore the Middle Ages from 500 to 1500 AD</p>
+            </div>
+             
+              <div class="history-content">
+                <figure class="history-figure float-right">
+                    <img src="Ged/Bedecha.png" alt="Pyramids">
+                    <figcaption>The Great Man of Gedeo People</figcaption>
+                </figure>
+                
+                <p> Ethiopian women heroes include historical leaders like Empress Taytu Betul, who was pivotal in defending Ethiopia against colonization at the Battle of Adwa, and Woizero Abebech Cherqos, who helped organize the "Ethiopian Women's Military Movement" during the Second Italo-Ethiopian War. In modern times, celebrated figures include accomplished athletes like Derartu Tulu and Tirunesh Dibaba, and changemakers like Freweini Mebrahtu, the 2019 CNN Hero of the Year, and Captain Amsale Gualu, the first female Ethiopian captain on a Boeing 767. <br><br>
+
+                Empress Eleni Mohammed: A 16th-century empress who used her diplomatic skills and military strategy to forge alliances with the Portuguese to counter threats from the Ottoman Turks. <br>
+                Ancient history covers all continents inhabited by humans from 3000 BC to AD 500. The three-age system periodizes ancient history into the Stone Age, Bronze Age, and Iron Age.</p>
+                
+                <p>Early human civilizations first developed in Mesopotamia, Ancient Egypt, Ancient India, and Ancient China. These civilizations developed writing systems, built monumental architecture, and made significant advances in mathematics and astronomy.</p>
+                
+                 <!-- Add this at the end of the history-content div in new section -->
+<div class="btn-wrapper">
+    <a href="pdf-page.html#bedecha" class="pdf-btn" onclick="this.classList.add('loading'); this.innerHTML='<i class=\'fas fa-spinner fa-spin\'></i> Loading PDF...'">
+        <i class="fas fa-file-pdf"></i> Bedecha Eudo Biography PDF
+    </a>
+</div>
+                
+            </div>
+            
+</section>
+        <!-- ... (keep your remaining existing sections) ... -->
+    </main>
+ 
+  <div class="container_1">
+    <!-- ONE ROW, TWO COLUMNS - SIMPLIFIED -->
+    <div class="btn-row">
+        <!-- First Button -->
+        <button class="app-btn" id="numbersBtn">
+            <i class="btn-icon fas fa-regular fa-circle-question"></i>
+            <span class="btn-title">Hega Uushsho</span>
+            <span class="btn-desc">Interactive quiz and learn history.</span>
+        </button>
+        <!-- Second Button -->
+        <button class="app-btn secondary" id="playlistBtn1">
+            <i class="btn-icon fas fa-music"></i>
+            <span class="btn-title">Muuzuqa</span>
+            <span class="btn-desc">Explore Gedeo Traditional Music and songs.</span>
+        </button>
+    </div>
+</div>
+
+<br><br>
+    
+    <footer>
+        <p>© 2018 G.W | Raaga Barrata <br>GedeoKids</p>
+    </footer>
+
+ <!-- FAB Bottom Navigation -->
+  <!-- FAB Bottom Navigation -->
+<nav class="bottom-nav">
+  <a href="../abc/abc.html" class="nav-link"><i class="fas fa-font"></i><span>Borro</span></a>
+  <a href="history.html" class="nav-link active"><i class="fas fa-history"></i><span>Raaga</span></a>
+
+  <div class="fab-container">
+    <button class="add-button" id="homeBtn"><i class="fas fa-home"></i></button>
+    <div class="fab-menu" id="fabMenu">
+      <a href="../../Gallery/gallery.html" class="fab-item" title="Gallery"><i class="fas fa-images"></i></a>
+      <a href="../../Video/video.htm" class="fab-item" title="Video"><i class="fas fa-video"></i></a>
+      <a href="../../../../En/Home/Next2/Games/games-zone.html" class="fab-item" title="Games"><i class="fa-solid fa-gamepad"></i></a>
+    </div>
+  </div>
+
+  <a href="../Calendar/calendar.html" class="nav-link"><i class="fas fa-calendar"></i><span>Barra</span></a>
+  <a href="../Color/colors.html" class="nav-link"><i class="fas fa-palette"></i><span>Hallo</span></a>
+</nav>
+
+<!-- Loading & Offline Overlays -->
+<div class="loading-overlay"><div class="loading-spinner"></div></div>
+
+<div class="offline-overlay" id="offlineOverlay">
+  <div class="offline-message">
+    <button class="close-offline" id="closeOffline">&times;</button>
+    <i class="fas fa-wifi-slash offline-icon"></i>
+    <h2>NO Internet!</h2>
+    <p>Please check your WiFi or mobile data connection</p>
+    <button class="retry-button">Retry</button>
+  </div>
+</div>
+
+<!-- Online Toast -->
+<div class="online-toast" id="onlineToast">
+  <i class="fas fa-wifi"></i> Back Online
+</div>
+
+<!-- Sounds -->
+<audio id="soundOnline" preload="auto">
+  <source src="data:audio/wav;base64,UklGRlIAAABXQVZFZm10IBAAAAABAAEA..." type="audio/wav">
+</audio>
+<audio id="soundOffline" preload="auto">
+  <source src="data:audio/wav;base64,UklGRlIAAABXQVZFZm10IBAAAAABAAEA..." type="audio/wav">
+</audio>
+
+  <button id="downArrowBtn" class="down-arrow-btn" aria-label="Scroll to bottom">
+    <i class="fas fa-chevron-down"></i>
+  </button>
+
+  <button id="upArrowBtn" class="up-arrow-btn" aria-label="Scroll to top">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+    <script src="../Down_icon/script22.js"></script>
+    <script src="script-nav.js"></script>
+    <script src="history_js.js"></script>
+  <script>
+
+     document.addEventListener('DOMContentLoaded', function() {
+        // Get both buttons
+        const quizBtn = document.getElementById('numbersBtn');
+        const playlistBtn = document.getElementById('amharicBtn');
+        
+        // Quiz button click handler
+        if (quizBtn) {
+            quizBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Add loading class
+                this.classList.add('loading');
+                
+                // Store original content
+                const originalIcon = this.querySelector('.btn-icon').innerHTML;
+                const originalTitle = this.querySelector('.btn-title').innerText;
+                const originalDesc = this.querySelector('.btn-desc').innerText;
+                
+                // Change to loading state
+                this.querySelector('.btn-icon').innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+                this.querySelector('.btn-title').innerText = 'Mittle heqqe...';
+                this.querySelector('.btn-desc').innerText = 'Hega Uushsho...';
+                
+                // Redirect after 3 seconds
+                setTimeout(() => {
+                    window.location.href = '../Quiz/quiz.html'; // Change to your actual quiz page
+                }, 3000);
+            });
+        }
+        
+        // Playlist button click handler
+        if (playlistBtn1) {
+            playlistBtn1.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Add loading class
+                this.classList.add('loading');
+                
+                // Store original content
+                const originalIcon = this.querySelector('.btn-icon').innerHTML;
+                const originalTitle = this.querySelector('.btn-title').innerText;
+                const originalDesc = this.querySelector('.btn-desc').innerText;
+                
+                // Change to loading state
+                this.querySelector('.btn-icon').innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+                this.querySelector('.btn-title').innerText = 'Mittle heqqe...';
+                this.querySelector('.btn-desc').innerText = 'Muuzuqa...';
+                
+                // Redirect after 3 seconds
+                setTimeout(() => {
+                    window.location.href = 'playlists.html'; // Change to your actual playlist page
+                }, 3000);
+            });
+        }
+        
+        // Mobile touch support
+        if ('ontouchstart' in window) {
+            const allButtons = [quizBtn, playlistBtn1].filter(btn => btn !== null);
+            
+            allButtons.forEach(button => {
+                button.addEventListener('touchstart', function() {
+                    this.style.transform = 'scale(0.97)';
+                });
+                
+                button.addEventListener('touchend', function() {
+                    this.style.transform = '';
+                });
+            });
+        }
+        
+        // Keyboard accessibility
+        const allButtons = [quizBtn, playlistBtn1].filter(btn => btn !== null);
+        
+        allButtons.forEach(button => {
+            button.setAttribute('tabindex', '0');
+            
+            button.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    this.click();
+                }
+            });
+        });
+    });
+
+    </script>
+    
+</body>
+</html>
